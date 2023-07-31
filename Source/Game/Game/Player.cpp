@@ -25,16 +25,16 @@ void Player::Update(float dt) {
     }
     // Cruising
     else {
-        if (m_drive < 0.001 && m_drive > -0.001) m_drive = 0;
-        else if (m_drive > 0) m_drive -= 0.005;
-        else if (m_drive < 0) m_drive += 0.005;
+        if (m_drive < 0.001 && m_drive > -0.001) m_drive = 0.0f;
+        else if (m_drive > 0) m_drive -= 0.005f;
+        else if (m_drive < 0) m_drive += 0.005f;
     }
 
     if (kiko::g_inputSystem.GetKeyDown(SDL_SCANCODE_A) && m_rotate > -1 ) m_rotate -= 0.05f;
     else if (kiko::g_inputSystem.GetKeyDown(SDL_SCANCODE_D) && m_rotate < 1) m_rotate += 0.05f;
     else if (m_currentSpeed) {
         // Bring rotate back to zero
-        if (m_rotate < 0.001 && m_rotate > -0.001) m_rotate = 0;
+        if (m_rotate < 0.001 && m_rotate > -0.001) m_rotate = 0.0f;
         else if (m_rotate > 0) m_rotate -= 0.01f;
         else if (m_rotate < 0) m_rotate += 0.01f;
         

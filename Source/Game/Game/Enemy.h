@@ -22,7 +22,7 @@ public:
 		m_brakePower{ brakePower },
 		m_turnRate{ turnRate }
 	{
-		m_damping = 0.95;	
+		m_damping = 0.95f;	
 	}
 
 	void Update(float dt) override;
@@ -47,9 +47,9 @@ public:
 	}
 
 	void Coast() {
-		if (m_drive < 0.001 && m_drive > -0.001) m_drive = 0;
-		else if (m_drive > 0) m_drive -= 0.01;
-		else if (m_drive < 0) m_drive += 0.01;
+		if (m_drive < 0.001 && m_drive > -0.001) m_drive = 0.0f;
+		else if (m_drive > 0) m_drive -= 0.01f;
+		else if (m_drive < 0) m_drive += 0.01f;
 	}
 	
 	float m_currentSpeed = 0;

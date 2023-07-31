@@ -89,7 +89,7 @@ void DrivingGame::Update(float dt)
 			m_spawnTimer += dt;
 			if (m_spawnTimer >= m_spawnTime && m_scene->GetEnemyCount() < 20) {
 				m_spawnTimer = 0;
-				std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(kiko::randomf(1000.0f, 1100.0f), 0.01f, 0.01f, kiko::DegToRad(kiko::randomf(15.0f, 25.0f)), kiko::Transform { { kiko::randomf(0, kiko::g_renderer.GetWidth()), kiko::randomf(0, kiko::g_renderer.GetHeight()) }, 0, kiko::randomf(8, 11) }, kiko::g_modelManager.Get("EnemyCar.txt"));
+				std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(kiko::randomf(1000.0f, 1100.0f), 0.01f, 0.01f, kiko::DegToRad(kiko::randomf(15.0f, 25.0f)), kiko::Transform { { kiko::randomf(0, (float)kiko::g_renderer.GetWidth()), kiko::randomf(0, (float)kiko::g_renderer.GetHeight()) }, 0, kiko::randomf(8, 11) }, kiko::g_modelManager.Get("EnemyCar.txt"));
 				enemy->m_tag = "Enemy";
 				enemy->m_game = this;
 				m_scene->Add(std::move(enemy));

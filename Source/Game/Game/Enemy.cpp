@@ -21,29 +21,29 @@ void Enemy::Update(float dt) {
         
         switch (FindPlayer()) {
             case ePlayerLocation::Front:
-                Steer(0);
+                Steer(0.0f);
                 if (m_currentSpeed < m_maxSpeed) Drive();
                 else Coast();
                 break;
             case ePlayerLocation::FrontLeft:
-                Steer(-0.03);
+                Steer(-0.03f);
                 if (m_currentSpeed < m_maxSpeed) Drive();
                 else Coast();
                 break;
             case ePlayerLocation::FrontRight:
-                Steer(0.03);
+                Steer(0.03f);
                 if (m_currentSpeed < m_maxSpeed) Drive();
                 else Coast();
                 break;
             case ePlayerLocation::BackLeft:
-                if (playerDistance < 250) Steer(-0.015);
-                else Steer(0.015);
+                if (playerDistance < 250) Steer(-0.015f);
+                else Steer(0.015f);
                 if (m_currentSpeed < m_maxSpeed) Reverse();
                 else Coast();
                 break;
             case ePlayerLocation::BackRight:
-                if (playerDistance < 250) Steer(0.015);
-                else Steer(-0.015);
+                if (playerDistance < 250) Steer(0.015f);
+                else Steer(-0.015f);
                 if (m_currentSpeed < m_maxSpeed) Reverse();
                 else Coast();
                 break;
