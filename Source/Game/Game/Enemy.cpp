@@ -19,7 +19,15 @@ void Enemy::Update(float dt) {
 
         float playerDistance = m_transform.position.Distance(m_player->m_transform.position);
         
-        switch (FindPlayer()) {
+        // Only update player location if they didnt wrap
+        
+        //if (!m_player->DidWrap() && m_transform.position.Distance(m_player->GetLastPosition()) > 500) {
+        //    m_playerLocation = FindPlayer();
+        //}
+        //if (!m_player->DidWrap()) 
+        
+        m_playerLocation = FindPlayer();
+        switch (m_playerLocation) {
             case ePlayerLocation::Front:
                 Steer(0.0f);
                 if (m_currentSpeed < m_maxSpeed) Drive();

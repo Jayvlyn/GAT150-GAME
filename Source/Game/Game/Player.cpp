@@ -67,19 +67,15 @@ void Player::Update(float dt) {
     }
 
     // Wrapping
+    m_wrapped = false; // info for enemies
+    m_lastPosition = m_transform.position;
+
     m_transform.position.x = kiko::Wrap(m_transform.position.x, kiko::g_renderer.GetWidth());
     m_transform.position.y = kiko::Wrap(m_transform.position.y, kiko::g_renderer.GetHeight());
 
-    // Slowing time when about to collide
-
-    //for (auto iter1 = m_scene->GetActors().begin(); iter1 != m_scene->GetActors().end(); iter1++)
-    //{
-    //    if (kiko::Instanceof(*iter1))
-    //}
-
-    //if (willCollide(car1, car2, thresholdTime)) {
-    //    // SLOW TIME!
-    //}
+    if (kiko::Mag(m_transform.position - m_lastPosition) > 100.0f) {
+        m_wrapped = true;
+    }
 
     // Time Control
     float timeChangeSpeed = 0.08f;

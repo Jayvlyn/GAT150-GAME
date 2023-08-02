@@ -20,12 +20,12 @@
 #include <vector>
 #include <iostream>
 #include <memory>
+#include <cassert>
 
 using namespace std;
 
 int main(int argc, char* argv[]) 
 {
-    //class DrivingGame;
     kiko::MemoryTracker::Initialize();
     kiko::seedRandom((unsigned int)time(nullptr));
     kiko::setFilePath("assets");

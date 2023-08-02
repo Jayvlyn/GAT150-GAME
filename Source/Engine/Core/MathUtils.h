@@ -40,13 +40,13 @@ namespace kiko {
 	}
 
 	template <typename T>
-	inline T Mag(const T& x, const T& y) {
-		return sqrtf(powf(x, 2.0f) + powf(y, 2.0f));
+	inline float Mag(const T& x, const T& y) {
+		return sqrtf(powf((float)x, 2.0f) + powf((float)y, 2.0f));
 	}
 
 	template <typename T>
-	inline T Mag(const T& v) {
-		return Mag(v.x, v.y);
+	inline float Mag(const T& v) {
+		return Mag((float)v.x, (float)v.y);
 	}
 
 }

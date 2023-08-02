@@ -34,6 +34,7 @@
     <ClInclude Include="Color.h">
       <Filter>Source</Filter>
     </ClInclude>
+    <ClInclude Include="Logger.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FileIO.cpp">
@@ -43,6 +44,9 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Time.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Logger.cpp">
       <Filter>Source</Filter>
     </ClCompile>
   </ItemGroup>

@@ -67,6 +67,7 @@ private:
 	float m_health = 100;
 
 	Player* m_player = nullptr;
+	ePlayerLocation m_playerLocation = ePlayerLocation::Front;
 };
 
 
