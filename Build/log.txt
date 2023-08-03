@@ -1,1 +1,0 @@
-INFO: Main.cpp(28) Hello world
