@@ -3,6 +3,7 @@
 #include "DrivingGame.h"
 #include "Framework/Scene.h"
 #include "Framework/Emitter.h"
+#include "Framework/Components/PhysicsComponent.h"
 #include "Renderer/Renderer.h"
 #include <iostream>
 
@@ -57,9 +58,10 @@ void Enemy::Update(float dt) {
                 break;
         }
 
+        auto physicsComponent = GetComponent<kiko::PhysicsComponent>();
         
         // Move accordingly
-        AddForce(forward * m_enginePower * m_drive * kiko::g_time.GetDeltaTime());
+        physicsComponent->ApplyForce(forward * m_enginePower * m_drive * kiko::g_time.GetDeltaTime());
 
         // Wrapping
         m_transform.position.x = kiko::Wrap(m_transform.position.x, kiko::g_renderer.GetWidth());
@@ -78,7 +80,6 @@ void Enemy::OnCollision(Actor* other)
             if (m_currentSpeed < kiko::Mag(other->GetVelocity().x, other->GetVelocity().y)) {
                 AddForce(other->GetVelocity() * 1.5);
             }
-
 
             m_health--;
             if (m_health <= 0) {

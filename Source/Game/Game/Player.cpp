@@ -7,6 +7,8 @@
 
 #include "Framework/Scene.h"
 #include "Framework/Emitter.h"
+#include "Framework/Components/PhysicsComponent.h"
+
 #include "Audio/AudioSystem.h"
 #include <iostream>
 
@@ -59,11 +61,13 @@ void Player::Update(float dt) {
         m_driftForce = kiko::Lerp(m_driftForce, forward * m_driftDrive * m_driftEnginePower, kiko::g_time.GetDeltaTime());
     }
     ///
+    auto physicsComponent = GetComponent<kiko::PhysicsComponent>();
+
     if (!kiko::g_inputSystem.GetKeyDown(SDL_SCANCODE_LSHIFT)) {
-        AddForce((forward)*m_enginePower * m_drive * kiko::g_time.GetDeltaTime());
+        physicsComponent->ApplyForce((forward)*m_enginePower * m_drive * kiko::g_time.GetDeltaTime());
     }
     else {
-        AddForce(m_driftForce * kiko::g_time.GetDeltaTime());
+        physicsComponent->ApplyForce(m_driftForce * kiko::g_time.GetDeltaTime());
     }
 
     // Wrapping

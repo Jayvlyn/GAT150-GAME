@@ -5,6 +5,9 @@
 
 #include "Framework/Scene.h"
 #include "Framework/Emitter.h"
+#include "Framework/Resource/ResourceManager.h"
+#include "Framework/Components/SpriteComponent.h"
+#include "Framework/Components/EnginePhysicsComponent.h"
 
 #include "Audio/AudioSystem.h"
 #include "Input/InputSystem.h"
@@ -23,13 +26,12 @@
 bool DrivingGame::Init()
 {
 	// Create font / text objects
-	m_font = std::make_shared<kiko::Font>("Coalition_v2..ttf", 24); // Yes it has two dots thats not a mis-type
-	auto titleFont = std::make_shared<kiko::Font>("Coalition_v2..ttf", 48);
+	m_font = kiko::g_resources.Get<kiko::Font>("Coalition_v2..ttf", 24);
 
 	m_healthText = std::make_unique<kiko::Text>(m_font);
 	m_healthText->Create(kiko::g_renderer, "(Your health will be here, DONT CRASH!)", kiko::Color{ 1, 1, 1, 1});
 
-	m_titleText = std::make_unique<kiko::Text>(titleFont);
+	m_titleText = std::make_unique<kiko::Text>(kiko::g_resources.Get<kiko::Font>("Coalition_v2..ttf", 48));
 	m_titleText->Create(kiko::g_renderer, "TIME DRIFTER", kiko::Color{ 1, 1, 1, 1});
 
 	m_startPromptText = std::make_unique<kiko::Text>(m_font);
@@ -75,10 +77,22 @@ void DrivingGame::Update(float dt)
 	case eState::StartLevel:
 		m_scene->RemoveAll();
 	{
-		std::unique_ptr<Player> player = std::make_unique<Player>(1000.0f, 0.01f, 0.005f, kiko::DegToRad(25.0f), kiko::Transform{ {kiko::g_renderer.GetWidth() / 2, kiko::g_renderer.GetHeight() / 2}, 0, 10 }, kiko::g_modelManager.Get("Car.txt"));
+		// Create player
+		auto player = std::make_unique<Player>(1000.0f, 0.01f, 0.005f, kiko::DegToRad(25.0f), kiko::Transform{ {kiko::g_renderer.GetWidth() / 2, kiko::g_renderer.GetHeight() / 2}, 0, 10 }, kiko::g_modelManager.Get("Car.txt"));
 		player->m_tag = "Player";
-		player->SetDamping(0.95f);
 		player->m_game = this;
+
+		// Create Components
+		auto spriteComponent = std::make_unique<kiko::SpriteComponent>();
+		spriteComponent->m_texture = kiko::g_resources.Get<kiko::Texture>("Car1.png", kiko::g_renderer);
+		player->AddComponent(std::move(spriteComponent));
+
+		auto physicsComponent = std::make_unique<kiko::EnginePhysicsComponent>();
+		physicsComponent->m_damping = 0.9;
+		player->AddComponent(std::move(physicsComponent));
+
+
+
 		m_scene->Add(std::move(player));
 	}
 		m_state = eState::Game;
@@ -92,8 +106,31 @@ void DrivingGame::Update(float dt)
 				std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(kiko::randomf(800.0f, 1200.0f), 0.01f, 0.01f, kiko::DegToRad(kiko::randomf(15.0f, 25.0f)), kiko::Transform { { kiko::randomf(0, (float)kiko::g_renderer.GetWidth()), kiko::randomf(0, (float)kiko::g_renderer.GetHeight()) }, 0, kiko::randomf(8, 11) }, kiko::g_modelManager.Get("EnemyCar.txt"));
 				enemy->m_tag = "Enemy";
 				enemy->m_game = this;
-				m_scene->Add(std::move(enemy));
 				m_scene->IncrementEnemyCount();
+
+				// Create Components
+
+				auto component = std::make_unique<kiko::SpriteComponent>();
+				int spriteNum = kiko::random(1, 3);
+				switch (spriteNum) {
+				case 1:
+					component->m_texture = kiko::g_resources.Get<kiko::Texture>("Car2.png", kiko::g_renderer);
+					break;
+				case 2:
+					component->m_texture = kiko::g_resources.Get<kiko::Texture>("Car3.png", kiko::g_renderer);
+					break;
+				case 3:
+					component->m_texture = kiko::g_resources.Get<kiko::Texture>("Car4.png", kiko::g_renderer);
+					break;
+				}
+				
+				enemy->AddComponent(std::move(component));
+
+				auto physicsComponent = std::make_unique<kiko::EnginePhysicsComponent>();
+				physicsComponent->m_damping = 0.9;
+				enemy->AddComponent(std::move(physicsComponent));
+
+				m_scene->Add(std::move(enemy));
 			}
 
 			m_clockSpawnTimer += dt;
@@ -150,7 +187,7 @@ void DrivingGame::Draw(kiko::Renderer& renderer)
 {
 	if (m_state == eState::Title) {
 		m_titleText->Draw(renderer, 40, renderer.GetHeight() / 2);
-		m_startPromptText->Draw(renderer, 40, renderer.GetHeight() / 2 - 40);
+		m_startPromptText->Draw(renderer, 40, renderer.GetHeight() / 2 + 40);
 	}
 	else if (m_state == eState::PlayerDead) {
 		m_deathText->Draw(renderer, renderer.GetWidth()/2, renderer.GetHeight()/2);

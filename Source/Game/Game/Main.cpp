@@ -5,11 +5,14 @@
 #include "Renderer/Font.h"    
 #include "Renderer/Text.h"
 #include "Renderer/ParticleSystem.h"
+#include "Renderer/Texture.h"
+
 
 #include "Input/InputSystem.h"
 #include "Audio/AudioSystem.h"
 
 #include "Framework/Scene.h"
+#include "Framework/Resource/ResourceManager.h"
 
 #include "Player.h"
 #include "Enemy.h"
@@ -21,10 +24,12 @@
 #include <iostream>
 #include <memory>
 #include <cassert>
+#include <array>
+#include <map>
 
 using namespace std;
 
-int main(int argc, char* argv[]) 
+int main(int argc, char* argv[])
 {
     kiko::MemoryTracker::Initialize();
     kiko::seedRandom((unsigned int)time(nullptr));
@@ -41,7 +46,13 @@ int main(int argc, char* argv[])
     // Create Game
     unique_ptr<DrivingGame> game = make_unique<DrivingGame>();
     game->Init();
-        
+
+    kiko::res_t<kiko::Texture> car1 = kiko::g_resources.Get<kiko::Texture>("Car1.png", kiko::g_renderer);
+
+    kiko::res_t<kiko::Texture> car2 = kiko::g_resources.Get<kiko::Texture>("Car2.png", kiko::g_renderer);
+    kiko::res_t<kiko::Texture> car3 = kiko::g_resources.Get<kiko::Texture>("Car3.png", kiko::g_renderer);
+    kiko::res_t<kiko::Texture> car4 = kiko::g_resources.Get<kiko::Texture>("Car4.png", kiko::g_renderer);
+
     bool quit = false;
     while (!quit) 
     {
@@ -72,3 +83,4 @@ int main(int argc, char* argv[])
 
     return 0;
 }
+
