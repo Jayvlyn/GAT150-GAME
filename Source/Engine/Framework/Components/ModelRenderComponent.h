@@ -1,6 +1,6 @@
 #pragma once
 #include "RenderComponent.h"
-#include "Renderer/Texture.h"
+#include "Renderer/Model.h"
 
 namespace kiko
 {
@@ -11,7 +11,7 @@ namespace kiko
 		void Draw(class Renderer& renderer) override;
 
 	public:
-
+		res_t<Model> m_model;
 
 	};
 }

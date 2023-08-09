@@ -7,11 +7,12 @@ class Clock : public kiko::Actor {
 public:
 
     Clock(float time, const kiko::Transform& transform, std::shared_ptr<kiko::Model> model) :
-        kiko::Actor{ transform, model },
+        kiko::Actor{ transform },
         m_time{ time }
     {
         m_collision = false;
         m_lifespan = 20.0f;
+        m_model = model;
     }
 
     void Update(float dt) override;
@@ -19,5 +20,6 @@ public:
 
 private:
     float m_time = 0;
+    std::shared_ptr<kiko::Model> m_model = 0;
 
 };

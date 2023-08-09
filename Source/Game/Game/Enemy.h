@@ -3,8 +3,9 @@
 #include "Renderer/Model.h"
 #include "Player.h"
 #include "Framework/Scene.h"
+#include "Car.h"
 
-class Enemy : public kiko::Actor {
+class Enemy : public Car {
 
 public:
 	enum ePlayerLocation {
@@ -15,44 +16,14 @@ public:
 		BackLeft = 4
 	};
 
-	Enemy(float enginePower, float acceleration, float brakePower, float turnRate, const kiko::Transform& transform, std::shared_ptr<kiko::Model> model) :
-		kiko::Actor{ transform, model },
-		m_enginePower{ enginePower },
-		m_acceleration{ acceleration },
-		m_brakePower{ brakePower },
-		m_turnRate{ turnRate }
-	{
-		m_damping = 0.95f;	
-	}
+	Enemy(float enginePower, float acceleration, float brakePower, float turnRate, const kiko::Transform& transform) :
+		Car{ enginePower, acceleration, brakePower, turnRate, transform }
+	{ }
 
 	void Update(float dt) override;
-	void OnCollision(Actor* other) override;
+	void OnCollision(std::shared_ptr<Actor> other);
 	ePlayerLocation FindPlayer(kiko::vec2 forward);
 	ePlayerLocation FindPlayer();
-
-	/// <summary>
-	/// "m_rotate" gets adjusted to steer left or right
-	/// </summary>
-	/// <param name="steerAmount">Negative for left, Positive for right</param>
-	void Steer(float steerAmount);
-
-	void Reverse() 
-	{
-		if (m_drive > -1) m_drive -= m_brakePower;
-	}
-
-	void Drive()
-	{
-		if (m_drive < 1) m_drive += m_acceleration;
-	}
-
-	void Coast() {
-		if (m_drive < 0.001 && m_drive > -0.001) m_drive = 0.0f;
-		else if (m_drive > 0) m_drive -= 0.01f;
-		else if (m_drive < 0) m_drive += 0.01f;
-	}
-	
-	float m_currentSpeed = 0;
 
 private:
 	float m_enginePower = 0;

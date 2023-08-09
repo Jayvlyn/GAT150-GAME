@@ -5,47 +5,40 @@
 #include "Input/InputSystem.h"
 #include "Core/MathUtils.h"
 
-#include "Framework/Scene.h"
-#include "Framework/Emitter.h"
-#include "Framework/Components/PhysicsComponent.h"
+#include "Framework/Framework.h"
+
+#include "Renderer/Renderer.h"
 
 #include "Audio/AudioSystem.h"
 #include <iostream>
+#include <memory>
 
 void Player::Update(float dt) {
-    Actor::Update(dt);
-
-    m_currentSpeed = kiko::Mag(m_velocity.x, m_velocity.y);
+    Car::Update(dt);
+    //std::cout << m_currentSpeed << "\n";
+    //std::cout << m_rotate << "\n";
     
     // BRAKE
     if (kiko::g_inputSystem.GetKeyDown(SDL_SCANCODE_S)) {
-        if (m_drive > -1) m_drive -= m_brakePower;
+        Reverse();
     }
     // GAS
     else if (kiko::g_inputSystem.GetKeyDown(SDL_SCANCODE_W)) {
-        if (m_drive < 1) m_drive += m_acceleration;
+        Drive();
     }
     // Cruising
     else {
-        if (m_drive < 0.001 && m_drive > -0.001) m_drive = 0.0f;
-        else if (m_drive > 0) m_drive -= 0.005f;
-        else if (m_drive < 0) m_drive += 0.005f;
+        Coast();
     }
 
-    if (kiko::g_inputSystem.GetKeyDown(SDL_SCANCODE_A) && m_rotate > -1 ) m_rotate -= 0.05f;
-    else if (kiko::g_inputSystem.GetKeyDown(SDL_SCANCODE_D) && m_rotate < 1) m_rotate += 0.05f;
-    else if (m_currentSpeed) {
-        // Bring rotate back to zero
-        if (m_rotate < 0.001 && m_rotate > -0.001) m_rotate = 0.0f;
-        else if (m_rotate > 0) m_rotate -= 0.01f;
-        else if (m_rotate < 0) m_rotate += 0.01f;
-        
-    }
+    if (kiko::g_inputSystem.GetKeyDown(SDL_SCANCODE_A) && m_rotate > -1)        Steer(-0.05f);
+    else if (kiko::g_inputSystem.GetKeyDown(SDL_SCANCODE_D) && m_rotate < 1)    Steer(0.05f);
+    else if (m_currentSpeed)                                                    Steer(0);
 
     // Steer Rotations
     if (m_currentSpeed != 0) m_transform.rotation += (m_rotate * ((m_currentSpeed/100)* m_drive)) * m_turnRate * kiko::g_time.GetDeltaTime();
 
-    // Move player accordingly
+    // Drifting
     kiko::vec2 forward = kiko::vec2{ 0, -1 }.Rotate(m_transform.rotation);
     if (kiko::g_inputSystem.GetKeyDown(SDL_SCANCODE_LSHIFT) && !kiko::g_inputSystem.GetPreviousKeyDown(SDL_SCANCODE_LSHIFT)) {
         m_driftDrive = m_drive;
@@ -60,14 +53,14 @@ void Player::Update(float dt) {
     else {
         m_driftForce = kiko::Lerp(m_driftForce, forward * m_driftDrive * m_driftEnginePower, kiko::g_time.GetDeltaTime());
     }
-    ///
-    auto physicsComponent = GetComponent<kiko::PhysicsComponent>();
+   
+    // Apply force
 
     if (!kiko::g_inputSystem.GetKeyDown(SDL_SCANCODE_LSHIFT)) {
-        physicsComponent->ApplyForce((forward)*m_enginePower * m_drive * kiko::g_time.GetDeltaTime());
+        m_physics->ApplyForce((forward)*m_enginePower * m_drive * kiko::g_time.GetDeltaTime());
     }
     else {
-        physicsComponent->ApplyForce(m_driftForce * kiko::g_time.GetDeltaTime());
+        m_physics->ApplyForce(m_driftForce * kiko::g_time.GetDeltaTime());
     }
 
     // Wrapping
@@ -98,11 +91,11 @@ void Player::Update(float dt) {
     kiko::g_time.SetTimeScale(kiko::Lerp(kiko::g_time.GetTimeScale(), m_timeScale, timeChangeSpeed));
 }
 
-void Player::OnCollision(Actor* other) 
+void Player::OnCollision(std::shared_ptr<Actor> other) 
 {
     if (!m_collision) {
-        m_collision = true; // TURNS OFF COLLISION, MAKE TINY SHORT TIMER TO SET IT BACK TO FALSE
-        m_collisionTimer = 1.0f;
+        m_collision = true; 
+        m_collisionTimer = 0.8f;
 
         if (other->m_tag == "Clock") {
             other->m_destroyed = true;
@@ -110,11 +103,14 @@ void Player::OnCollision(Actor* other)
 
         if (other->m_tag == "Enemy")
         {
+            std::shared_ptr<Enemy> enemy = std::dynamic_pointer_cast<Enemy>(other);
+
             // Collision force
-            if (kiko::Mag(m_velocity.x, m_velocity.y) < kiko::Mag(other->GetVelocity().x, other->GetVelocity().y)) {
-                AddForce(other->GetVelocity());
+            if (kiko::Mag(m_physics->m_velocity.x, m_physics->m_velocity.y) < kiko::Mag(enemy->m_physics->m_velocity.x, enemy->m_physics->m_velocity.y)) {
+                m_physics->ApplyForce(enemy->m_physics->m_velocity);
             }
 
+            // Hit sound
             int hitSelection = kiko::random(1, 3);
             switch (hitSelection) {
             case 1:
@@ -127,7 +123,6 @@ void Player::OnCollision(Actor* other)
                 kiko::g_audioSystem.PlayOneShot("hit3");
                 break;
             }
-
 
             // Crash Particles
             kiko::EmitterData data;
@@ -147,6 +142,7 @@ void Player::OnCollision(Actor* other)
             emitter->m_lifespan = 0.1f;
             m_scene->Add(std::move(emitter));
 
+            // Health + Death
             m_health--;
             if (m_health <= 0) {
                 // Death Particles

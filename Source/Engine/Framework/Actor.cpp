@@ -38,6 +38,5 @@ namespace kiko {
 	{
 		component->m_owner = this;
 		m_components.push_back(std::move(component));
-		
 	}
 }

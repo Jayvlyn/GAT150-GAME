@@ -12,5 +12,5 @@ void Clock::OnCollision(Actor* other)
         dynamic_cast<Player*>(other)->AddBonsuTime(m_time);
         m_destroyed = true;
     }
-
 }
+

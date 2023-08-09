@@ -1,6 +1,10 @@
 #include "Text.h"
 #include "Font.h"
+#include "Renderer.h"
+#include <SDL2-2.28.1/include/SDL.h>
 #include <SDL2-2.28.1/include/SDL_ttf.h>
+
+
 namespace kiko
 {
 	Text::~Text()

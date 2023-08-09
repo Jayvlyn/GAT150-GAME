@@ -160,6 +160,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Car.cpp" />
     <ClCompile Include="Clock.cpp" />
     <ClCompile Include="DrivingGame.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -185,6 +186,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Car.h" />
     <ClInclude Include="Clock.h" />
     <ClInclude Include="DrivingGame.h" />
     <ClInclude Include="Enemy.h" />

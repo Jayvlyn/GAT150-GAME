@@ -17,6 +17,11 @@ namespace kiko {
 		Vector2(float x, float y) : x{ x }, y{ y } {}
 		Vector2(int x, int y) : x{ (float)x }, y{ (float)y } {}
 
+		float	operator [] (size_t index) const { return (&x)[index]; }
+		float& operator [] (size_t index) { return (&x)[index]; }
+
+		Vector2 operator - () const { return Vector2(-x, -y); }
+
 		Vector2 operator + (const Vector2& v) const { return Vector2(x + v.x, y + v.y); }
 		Vector2 operator - (const Vector2& v) const { return Vector2(x - v.x, y - v.y); }
 		Vector2 operator * (const Vector2& v) const { return Vector2(x * v.x, y * v.y); }
@@ -28,9 +33,9 @@ namespace kiko {
 		Vector2 operator / (const float s) const { return Vector2(x / s, y / s); }
 
 		Vector2& operator += (const Vector2& v) { x += v.x; y += v.y; return *this; }
-		Vector2& operator -= (const Vector2& v) { x += v.x; y += v.y; return *this; }
-		Vector2& operator *= (const Vector2& v) { x += v.x; y += v.y; return *this; }
-		Vector2& operator /= (const Vector2& v) { x += v.x; y += v.y; return *this; }
+		Vector2& operator -= (const Vector2& v) { x -= v.x; y -= v.y; return *this; }
+		Vector2& operator *= (const Vector2& v) { x *= v.x; y *= v.y; return *this; }
+		Vector2& operator /= (const Vector2& v) { x /= v.x; y /= v.y; return *this; }
 
 		Vector2& operator += (const float s) { x += s; y += s; return *this; }
 		Vector2& operator -= (const float s) { x -= s; y -= s; return *this; }

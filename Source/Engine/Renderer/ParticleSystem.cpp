@@ -1,5 +1,6 @@
 #include "ParticleSystem.h"
 
+
 namespace kiko {
 
 	ParticleSystem g_particleSystem(25);

@@ -3,18 +3,12 @@
 #include "Enemy.h"
 #include "Clock.h"
 
-#include "Framework/Scene.h"
-#include "Framework/Emitter.h"
-#include "Framework/Resource/ResourceManager.h"
-#include "Framework/Components/SpriteComponent.h"
-#include "Framework/Components/EnginePhysicsComponent.h"
+#include "Framework/Framework.h"
 
 #include "Audio/AudioSystem.h"
 #include "Input/InputSystem.h"
 
 #include "Renderer/Renderer.h"
-#include "Renderer/Text.h"
-#include "Renderer/ModelManager.h"
 
 #include "Core/Time.h"
 #include "Core/Transform.h"
@@ -78,7 +72,7 @@ void DrivingGame::Update(float dt)
 		m_scene->RemoveAll();
 	{
 		// Create player
-		auto player = std::make_unique<Player>(1000.0f, 0.01f, 0.005f, kiko::DegToRad(25.0f), kiko::Transform{ {kiko::g_renderer.GetWidth() / 2, kiko::g_renderer.GetHeight() / 2}, 0, 10 }, kiko::g_modelManager.Get("Car.txt"));
+		auto player = std::make_unique<Player>(1000.0f, 0.01f, 0.005f, kiko::DegToRad(25.0f), kiko::Transform{ {kiko::g_renderer.GetWidth() / 2, kiko::g_renderer.GetHeight() / 2}, 0, 10 });
 		player->m_tag = "Player";
 		player->m_game = this;
 
@@ -88,63 +82,65 @@ void DrivingGame::Update(float dt)
 		player->AddComponent(std::move(spriteComponent));
 
 		auto physicsComponent = std::make_unique<kiko::EnginePhysicsComponent>();
-		physicsComponent->m_damping = 0.9;
+		physicsComponent->m_damping = 0.9f;
 		player->AddComponent(std::move(physicsComponent));
 
-
-
+		player->Start();
 		m_scene->Add(std::move(player));
 	}
 		m_state = eState::Game;
 		break;
 		
 	case eState::Game:
-		{
-			m_spawnTimer += dt;
-			if (m_spawnTimer >= m_spawnTime && m_scene->GetEnemyCount() < 20) {
-				m_spawnTimer = 0;
-				std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(kiko::randomf(800.0f, 1200.0f), 0.01f, 0.01f, kiko::DegToRad(kiko::randomf(15.0f, 25.0f)), kiko::Transform { { kiko::randomf(0, (float)kiko::g_renderer.GetWidth()), kiko::randomf(0, (float)kiko::g_renderer.GetHeight()) }, 0, kiko::randomf(8, 11) }, kiko::g_modelManager.Get("EnemyCar.txt"));
-				enemy->m_tag = "Enemy";
-				enemy->m_game = this;
-				m_scene->IncrementEnemyCount();
+	{
+		m_spawnTimer += dt;
+		if (m_spawnTimer >= m_spawnTime && m_scene->GetEnemyCount() < 20) {
+			m_spawnTimer = 0;
+			std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(kiko::randomf(800.0f, 1200.0f), 0.01f, 0.01f, kiko::DegToRad(kiko::randomf(15.0f, 25.0f)), kiko::Transform { { kiko::randomf(0, (float)kiko::g_renderer.GetWidth()), kiko::randomf(0, (float)kiko::g_renderer.GetHeight()) }, 0, kiko::randomf(8, 11) });
+			enemy->m_tag = "Enemy";
+			enemy->m_game = this;
+			m_scene->IncrementEnemyCount();
 
-				// Create Components
+			// Create Components
 
-				auto component = std::make_unique<kiko::SpriteComponent>();
-				int spriteNum = kiko::random(1, 3);
-				switch (spriteNum) {
-				case 1:
-					component->m_texture = kiko::g_resources.Get<kiko::Texture>("Car2.png", kiko::g_renderer);
-					break;
-				case 2:
-					component->m_texture = kiko::g_resources.Get<kiko::Texture>("Car3.png", kiko::g_renderer);
-					break;
-				case 3:
-					component->m_texture = kiko::g_resources.Get<kiko::Texture>("Car4.png", kiko::g_renderer);
-					break;
-				}
+			auto spriteComponent = std::make_unique<kiko::SpriteComponent>();
+			int spriteNum = kiko::random(1, 3);
+			switch (spriteNum) {
+			case 1:
+				spriteComponent->m_texture = kiko::g_resources.Get<kiko::Texture>("Car2.png", kiko::g_renderer);
+				break;
+			case 2:
+				spriteComponent->m_texture = kiko::g_resources.Get<kiko::Texture>("Car3.png", kiko::g_renderer);
+				break;
+			case 3:
+				spriteComponent->m_texture = kiko::g_resources.Get<kiko::Texture>("Car4.png", kiko::g_renderer);
+				break;
+			}
 				
-				enemy->AddComponent(std::move(component));
+			enemy->AddComponent(std::move(spriteComponent));
 
-				auto physicsComponent = std::make_unique<kiko::EnginePhysicsComponent>();
-				physicsComponent->m_damping = 0.9;
-				enemy->AddComponent(std::move(physicsComponent));
+			auto physicsComponent = std::make_unique<kiko::EnginePhysicsComponent>();
+			physicsComponent->m_damping = 0.9f;
+			enemy->AddComponent(std::move(physicsComponent));
 
-				m_scene->Add(std::move(enemy));
-			}
-
-			m_clockSpawnTimer += dt;
-			if (m_clockSpawnTimer >= m_clockSpawnTime && m_scene->GetEnemyCount() < 20) {
-				m_clockSpawnTimer = 0;
-				float clockWorth = (m_scene->GetEnemyCount() + m_gameTime/4) * kiko::g_time.GetTimeScale();
-				std::unique_ptr<Clock> clock = std::make_unique<Clock>(clockWorth, kiko::Transform {{kiko::random(0,kiko::g_renderer.GetWidth()), kiko::random(0,kiko::g_renderer.GetHeight())}, 0, 10}, kiko::g_modelManager.Get("Clock.txt"));
-				clock->m_tag = "Clock";
-				clock->m_game = this;
-				m_scene->Add(std::move(clock));
-			}
+			enemy->Start();
+			m_scene->Add(std::move(enemy));
 
 		}
 
+		/*
+		m_clockSpawnTimer += dt;
+		if (m_clockSpawnTimer >= m_clockSpawnTime && m_scene->GetEnemyCount() < 20) {
+			m_clockSpawnTimer = 0;
+			float clockWorth = (m_scene->GetEnemyCount() + m_gameTime/4) * kiko::g_time.GetTimeScale();
+			std::unique_ptr<Clock> clock = std::make_unique<Clock>(clockWorth, kiko::Transform {{kiko::random(0,kiko::g_renderer.GetWidth()), kiko::random(0,kiko::g_renderer.GetHeight())}, 0, 10}, kiko::g_modelManager.Get("Clock.txt"));
+			clock->m_tag = "Clock";
+			clock->m_game = this;
+			m_scene->Add(std::move(clock));
+		}
+		*/
+
+	}
 		break;
 	case eState::PlayerDeadStart:
 		m_stateTimer = 3.0f;

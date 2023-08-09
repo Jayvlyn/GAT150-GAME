@@ -1,11 +1,11 @@
 #pragma once
-
 #include "Core/Core.h"
 #include "Framework/Resource/Resource.h"
-#include "Renderer.h"
 #include <vector>
 
-namespace kiko {
+namespace kiko 
+{
+	class Renderer;
 
 	class Model : public Resource
 	{
@@ -17,7 +17,7 @@ namespace kiko {
 
 		bool Load(const std::string& filename);
 
-		bool Create(std::string filename, ...);
+		virtual bool Create(std::string filename, ...) override;
 
 		void Draw(Renderer& renderer, const vec2& position, float rotation, float scale);
 		void Draw(Renderer& renderer, const Transform& transform);

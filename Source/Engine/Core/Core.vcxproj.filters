@@ -5,6 +5,9 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
+    <Filter Include="Source\Math">
+      <UniqueIdentifier>{a9ac6ff3-fb19-4b02-90a5-e533940588ee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Random.h">
@@ -19,22 +22,25 @@
     <ClInclude Include="Time.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Vector2.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="Core.h">
       <Filter>Source</Filter>
     </ClInclude>
+    <ClInclude Include="Logger.h" />
+    <ClInclude Include="Vector2.h">
+      <Filter>Source\Math</Filter>
+    </ClInclude>
     <ClInclude Include="Transform.h">
-      <Filter>Source</Filter>
+      <Filter>Source\Math</Filter>
     </ClInclude>
     <ClInclude Include="MathUtils.h">
-      <Filter>Source</Filter>
+      <Filter>Source\Math</Filter>
     </ClInclude>
     <ClInclude Include="Color.h">
-      <Filter>Source</Filter>
+      <Filter>Source\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Logger.h" />
+    <ClInclude Include="Vector3.h">
+      <Filter>Source\Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FileIO.cpp">

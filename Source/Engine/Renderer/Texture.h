@@ -3,6 +3,7 @@
 #include "Core/Vector2.h"
 
 struct SDL_Texture;
+
 namespace kiko
 {
 	class Texture : public Resource

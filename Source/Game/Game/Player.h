@@ -1,20 +1,17 @@
 #pragma once
 #include "Framework/Actor.h"
+#include "Car.h"
 
-class Player : public kiko::Actor {
+class Player : public Car {
 
 public:
 
-	Player(float enginePower, float acceleration, float brakePower, float turnRate, const kiko::Transform& transform, std::shared_ptr<kiko::Model> model) :
-		kiko::Actor{ transform, model },
-		m_enginePower{ enginePower },
-		m_acceleration{ acceleration },
-		m_brakePower{ brakePower},
-		m_turnRate{ turnRate }
+	Player(float enginePower, float acceleration, float brakePower, float turnRate, const kiko::Transform& transform) :
+		Car{ enginePower, acceleration, brakePower, turnRate, transform }
 	{}
 
 	void Update(float dt) override;
-	void OnCollision(Actor* other) override;
+	void OnCollision(std::shared_ptr<Actor> other);
 
 	float GetHealth();
 
@@ -25,30 +22,19 @@ public:
 
 	kiko::vec2 GetLastPosition() { return m_lastPosition; }
 
-	float m_currentSpeed = 0;
 private:
 
 	// Drifting
 	kiko::vec2 m_driftForce{ 0,0 };
 	float m_driftEnginePower = 0;
 	float m_driftDrive = 0;
-	
-	// Driving
-	float m_enginePower = 0;
-	float m_acceleration = 0; 
-	float m_brakePower = 0; 
-	float m_turnRate = 0;
-	float m_drive = 0;
-	
-	// Turning
-	float m_rotate = 0;
 
+	// Player vars
 	float m_health = 100;
 	float m_timeScale = 1;
 	float m_bonusTime = 0;
 
 	//
-
 	kiko::vec2 m_lastPosition;
 	bool m_wrapped = false;
 

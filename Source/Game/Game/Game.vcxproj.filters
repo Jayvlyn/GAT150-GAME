@@ -25,6 +25,9 @@
     <ClCompile Include="Clock.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Car.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
@@ -40,6 +43,9 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Clock.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Car.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>
