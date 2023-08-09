@@ -24,6 +24,8 @@
     <ClInclude Include="FileIO.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="MathUtils.h" />
+    <ClInclude Include="Matrix22.h" />
+    <ClInclude Include="Matrix33.h" />
     <ClInclude Include="Memory.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="Time.h" />

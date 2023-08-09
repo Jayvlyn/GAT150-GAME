@@ -23,7 +23,7 @@ namespace kiko {
 			scale{ scale }
 		{}
 
-		inline mat2 GetMatrix() const
+		mat2 GetMatrix() const
 		{
 			mat2 ms = mat2::CreateScale(scale);
 			mat2 mr = mat2::CreateRotation(rotation);
