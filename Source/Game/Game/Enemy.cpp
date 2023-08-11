@@ -1,10 +1,8 @@
 #include "Enemy.h"
 #include "Player.h"
 #include "DrivingGame.h"
-#include "Framework/Scene.h"
-#include "Framework/Emitter.h"
-#include "Framework/Components/PhysicsComponent.h"
 #include "Renderer/Renderer.h"
+#include "Framework/Framework.h"
 #include <iostream>
 
 void Enemy::Update(float dt) {

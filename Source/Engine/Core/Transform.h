@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Vector2.h"
-#include "Matrix22.h"
+#include "Matrix33.h"
 
 namespace kiko {
 
@@ -23,12 +23,13 @@ namespace kiko {
 			scale{ scale }
 		{}
 
-		mat2 GetMatrix() const
+		mat3 GetMatrix() const
 		{
-			mat2 ms = mat2::CreateScale(scale);
-			mat2 mr = mat2::CreateRotation(rotation);
+			mat3 ms = mat3::CreateScale(scale);
+			mat3 mr = mat3::CreateRotation(rotation);
+			mat3 mt = mat3::CreateTranslation(position);
 
-			return ms * mr;
+			return mt * ms * mr;
 		}
 
 	};

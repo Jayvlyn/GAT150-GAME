@@ -1,5 +1,4 @@
 #pragma once
-#include "Framework/Actor.h"
 #include "Car.h"
 
 class Player : public Car {
@@ -37,6 +36,7 @@ private:
 	//
 	kiko::vec2 m_lastPosition;
 	bool m_wrapped = false;
+
 
 };
 

@@ -7,5 +7,6 @@ namespace kiko
 	{
 	public:
 		virtual void Draw(class Renderer& rednerer) = 0;
+		virtual float GetRadius() { return 0; }
 	};
 }

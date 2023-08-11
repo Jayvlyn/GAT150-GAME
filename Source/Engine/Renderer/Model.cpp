@@ -53,7 +53,7 @@ namespace kiko
 	{
 		if (m_points.empty()) return;
 
-		mat2 mx = transform.GetMatrix();
+		mat3 mx = transform.GetMatrix();
 
 		renderer.SetColor(Color::ToInt(m_color.r), Color::ToInt(m_color.g), Color::ToInt(m_color.b), Color::ToInt(m_color.a));
 		for (int i = 0; i < m_points.size() - 1; i++)

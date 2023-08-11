@@ -1,8 +1,6 @@
 #pragma once
-#include "Framework/Actor.h"
 #include "Renderer/Model.h"
 #include "Player.h"
-#include "Framework/Scene.h"
 #include "Car.h"
 
 class Enemy : public Car {

@@ -72,7 +72,7 @@ void DrivingGame::Update(float dt)
 		m_scene->RemoveAll();
 	{
 		// Create player
-		auto player = std::make_unique<Player>(1000.0f, 0.01f, 0.005f, kiko::DegToRad(25.0f), kiko::Transform{ {kiko::g_renderer.GetWidth() / 2, kiko::g_renderer.GetHeight() / 2}, 0, 10 });
+		auto player = std::make_unique<Player>(1000.0f, 0.01f, 0.005f, kiko::DegToRad(25.0f), kiko::Transform{ {kiko::g_renderer.GetWidth() / 2, kiko::g_renderer.GetHeight() / 2}, 0, 1 });
 		player->m_tag = "Player";
 		player->m_game = this;
 
@@ -85,7 +85,11 @@ void DrivingGame::Update(float dt)
 		physicsComponent->m_damping = 0.9f;
 		player->AddComponent(std::move(physicsComponent));
 
-		player->Start();
+		auto collisionComponent = std::make_unique<kiko::CircleCollisionComponent>();
+		collisionComponent->m_radius = 30.0f;
+		player->AddComponent(std::move(collisionComponent));
+
+		player->Initialize();
 		m_scene->Add(std::move(player));
 	}
 		m_state = eState::Game;
@@ -96,7 +100,7 @@ void DrivingGame::Update(float dt)
 		m_spawnTimer += dt;
 		if (m_spawnTimer >= m_spawnTime && m_scene->GetEnemyCount() < 20) {
 			m_spawnTimer = 0;
-			std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(kiko::randomf(800.0f, 1200.0f), 0.01f, 0.01f, kiko::DegToRad(kiko::randomf(15.0f, 25.0f)), kiko::Transform { { kiko::randomf(0, (float)kiko::g_renderer.GetWidth()), kiko::randomf(0, (float)kiko::g_renderer.GetHeight()) }, 0, kiko::randomf(8, 11) });
+			std::unique_ptr<Enemy> enemy = std::make_unique<Enemy>(kiko::randomf(800.0f, 1200.0f), 0.01f, 0.01f, kiko::DegToRad(kiko::randomf(15.0f, 25.0f)), kiko::Transform { { kiko::randomf(0, (float)kiko::g_renderer.GetWidth()), kiko::randomf(0, (float)kiko::g_renderer.GetHeight()) }, 0, kiko::randomf(1.0f, 1.3f) });
 			enemy->m_tag = "Enemy";
 			enemy->m_game = this;
 			m_scene->IncrementEnemyCount();
@@ -123,7 +127,11 @@ void DrivingGame::Update(float dt)
 			physicsComponent->m_damping = 0.9f;
 			enemy->AddComponent(std::move(physicsComponent));
 
-			enemy->Start();
+			auto collisionComponent = std::make_unique<kiko::CircleCollisionComponent>();
+			collisionComponent->m_radius = 30.0f;
+			enemy->AddComponent(std::move(collisionComponent));
+
+			enemy->Initialize();
 			m_scene->Add(std::move(enemy));
 
 		}

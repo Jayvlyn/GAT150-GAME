@@ -16,7 +16,7 @@ public:
 
 	void Update(float dt) override;
 
-	void Start();
+	bool Initialize() override;
 
 	/// <summary>
 	/// "m_rotate" gets adjusted to steer left or right

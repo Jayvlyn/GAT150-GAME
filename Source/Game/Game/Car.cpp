@@ -1,5 +1,5 @@
 #include "Car.h"
-#include "Framework/Components/EnginePhysicsComponent.h"
+#include "Framework/Framework.h"
 #include <iostream>
 
 void Car::Update(float dt)
@@ -8,16 +8,31 @@ void Car::Update(float dt)
     m_currentSpeed = kiko::Mag(m_physics->m_velocity.x, m_physics->m_velocity.y);
 }
 
-void Car::Start()
+bool Car::Initialize()
 {
+    Actor::Initialize();
+
+    // cache off
     m_physics = GetComponent<kiko::EnginePhysicsComponent>();
+    auto collisionComponent = GetComponent<kiko::CollisionComponent>();
+    if (collisionComponent)
+    {
+        auto renderComponent = GetComponent<kiko::RenderComponent>();
+        if (renderComponent) 
+        {
+            collisionComponent->m_radius = GetComponent<kiko::RenderComponent>()->GetRadius() * m_transform.scale;
+        }
+        
+    }
+
+    return true;
 }
 
 void Car::Steer(float steerAmount)
 {
     if (steerAmount) { // Steer amount not zero
         m_rotate += steerAmount;
-        if (m_currentSpeed != 0) m_transform.rotation += (m_rotate * ((m_currentSpeed / 100) * m_drive)) * m_turnRate * kiko::g_time.GetDeltaTime();
+        if (m_currentSpeed != 0) m_transform.rotation += (m_rotate * ((m_currentSpeed / 1001) * m_drive)) * m_turnRate * kiko::g_time.GetDeltaTime();
     }
     else { // Steer amount zero
         if (m_currentSpeed)
