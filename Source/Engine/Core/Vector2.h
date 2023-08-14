@@ -83,6 +83,12 @@ namespace kiko {
 
 	}
 
+	inline std::ostream& operator << (std::ostream& stream, const Vector2& v)
+	{
+		stream << v.x << " " << v.y;
+		return stream;
+	}
+
 	// get the unsigned angle in radians between the normalized v1 and normalized v2
 	inline float Vector2::Angle(const Vector2& v1, const Vector2& v2)
 	{
