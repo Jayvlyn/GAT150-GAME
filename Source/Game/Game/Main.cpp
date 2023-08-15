@@ -26,6 +26,7 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
+
     kiko::MemoryTracker::Initialize();
     kiko::seedRandom((unsigned int)time(nullptr));
     kiko::setFilePath("assets");
@@ -69,11 +70,11 @@ int main(int argc, char* argv[])
     unique_ptr<DrivingGame> game = make_unique<DrivingGame>();
     game->Init();
 
-    kiko::res_t<kiko::Texture> car1 = kiko::g_resources.Get<kiko::Texture>("Car1.png", kiko::g_renderer);
+    kiko::res_t<kiko::Texture> car1 = GET_RESOURCE(kiko::Texture, "Car1.png", kiko::g_renderer);
 
-    kiko::res_t<kiko::Texture> car2 = kiko::g_resources.Get<kiko::Texture>("Car2.png", kiko::g_renderer);
-    kiko::res_t<kiko::Texture> car3 = kiko::g_resources.Get<kiko::Texture>("Car3.png", kiko::g_renderer);
-    kiko::res_t<kiko::Texture> car4 = kiko::g_resources.Get<kiko::Texture>("Car4.png", kiko::g_renderer);
+    kiko::res_t<kiko::Texture> car2 = GET_RESOURCE(kiko::Texture, "Car2.png", kiko::g_renderer);
+    kiko::res_t<kiko::Texture> car3 = GET_RESOURCE(kiko::Texture, "Car3.png", kiko::g_renderer);
+    kiko::res_t<kiko::Texture> car4 = GET_RESOURCE(kiko::Texture, "Car4.png", kiko::g_renderer);
 
     bool quit = false;
     while (!quit) 

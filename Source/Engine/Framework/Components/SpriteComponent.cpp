@@ -4,6 +4,8 @@
 
 namespace kiko
 {
+	CLASS_DEFINITION(SpriteComponent);
+
 	void SpriteComponent::Update(float dt) {}
 
 	void SpriteComponent::Draw(Renderer& renderer)

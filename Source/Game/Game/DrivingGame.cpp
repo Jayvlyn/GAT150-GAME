@@ -20,12 +20,12 @@
 bool DrivingGame::Init()
 {
 	// Create font / text objects
-	m_font = kiko::g_resources.Get<kiko::Font>("Coalition_v2..ttf", 24);
+	m_font = GET_RESOURCE(kiko::Font,"Coalition_v2..ttf", 24);
 
 	m_healthText = std::make_unique<kiko::Text>(m_font);
 	m_healthText->Create(kiko::g_renderer, "(Your health will be here, DONT CRASH!)", kiko::Color{ 1, 1, 1, 1});
 
-	m_titleText = std::make_unique<kiko::Text>(kiko::g_resources.Get<kiko::Font>("Coalition_v2..ttf", 48));
+	m_titleText = std::make_unique<kiko::Text>(GET_RESOURCE(kiko::Font, "Coalition_v2..ttf", 48));
 	m_titleText->Create(kiko::g_renderer, "TIME DRIFTER", kiko::Color{ 1, 1, 1, 1});
 
 	m_startPromptText = std::make_unique<kiko::Text>(m_font);
@@ -77,15 +77,15 @@ void DrivingGame::Update(float dt)
 		player->m_game = this;
 
 		// Create Components
-		auto spriteComponent = std::make_unique<kiko::SpriteComponent>();
-		spriteComponent->m_texture = kiko::g_resources.Get<kiko::Texture>("Car1.png", kiko::g_renderer);
+		auto spriteComponent = CREATE_CLASS(SpriteComponent); //std::make_unique<kiko::SpriteComponent>();
+		spriteComponent->m_texture = GET_RESOURCE(kiko::Texture, "Car1.png", kiko::g_renderer);
 		player->AddComponent(std::move(spriteComponent));
 
-		auto physicsComponent = std::make_unique<kiko::EnginePhysicsComponent>();
+		auto physicsComponent = CREATE_CLASS(EnginePhysicsComponent);
 		physicsComponent->m_damping = 0.9f;
 		player->AddComponent(std::move(physicsComponent));
 
-		auto collisionComponent = std::make_unique<kiko::CircleCollisionComponent>();
+		auto collisionComponent = CREATE_CLASS(CircleCollisionComponent);
 		collisionComponent->m_radius = 30.0f;
 		player->AddComponent(std::move(collisionComponent));
 
@@ -111,13 +111,13 @@ void DrivingGame::Update(float dt)
 			int spriteNum = kiko::random(1, 3);
 			switch (spriteNum) {
 			case 1:
-				spriteComponent->m_texture = kiko::g_resources.Get<kiko::Texture>("Car2.png", kiko::g_renderer);
+				spriteComponent->m_texture = GET_RESOURCE(kiko::Texture, "Car2.png", kiko::g_renderer);
 				break;
 			case 2:
-				spriteComponent->m_texture = kiko::g_resources.Get<kiko::Texture>("Car3.png", kiko::g_renderer);
+				spriteComponent->m_texture = GET_RESOURCE(kiko::Texture, "Car3.png", kiko::g_renderer);
 				break;
 			case 3:
-				spriteComponent->m_texture = kiko::g_resources.Get<kiko::Texture>("Car4.png", kiko::g_renderer);
+				spriteComponent->m_texture = GET_RESOURCE(kiko::Texture, "Car4.png", kiko::g_renderer);
 				break;
 			}
 				
