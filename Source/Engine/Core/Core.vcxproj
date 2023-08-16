@@ -40,6 +40,7 @@
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="Memory.cpp" />
     <ClCompile Include="Time.cpp" />
+    <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

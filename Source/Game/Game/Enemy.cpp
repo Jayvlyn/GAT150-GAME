@@ -12,9 +12,9 @@ void Enemy::Update(float dt) {
 
     if (m_player != nullptr) 
     {
-        kiko::vec2 forward = kiko::vec2{ 0, -1 }.Rotate(m_transform.rotation);
+        kiko::vec2 forward = kiko::vec2{ 0, -1 }.Rotate(transform.rotation);
 
-        float playerDistance = m_transform.position.Distance(m_player->m_transform.position);
+        float playerDistance = transform.position.Distance(m_player->transform.position);
         
         // Only update player location if they didnt wrap
         
@@ -60,8 +60,8 @@ void Enemy::Update(float dt) {
         physicsComponent->ApplyForce(forward * m_enginePower * m_drive * kiko::g_time.GetDeltaTime());
 
         // Wrapping
-        m_transform.position.x = kiko::Wrap(m_transform.position.x, kiko::g_renderer.GetWidth());
-        m_transform.position.y = kiko::Wrap(m_transform.position.y, kiko::g_renderer.GetHeight());
+        transform.position.x = kiko::Wrap(transform.position.x, kiko::g_renderer.GetWidth());
+        transform.position.y = kiko::Wrap(transform.position.y, kiko::g_renderer.GetHeight());
     }
 }
 
@@ -71,7 +71,7 @@ void Enemy::OnCollision(std::shared_ptr<Actor> other)
         m_collision = true; // TURNS OFF COLLISION, MAKE TINY SHORT TIMER TO SET IT BACK TO FALSE
         m_collisionTimer = 0.8f;
 
-        if (other->m_tag == "Player") {
+        if (other->tag == "Player") {
             
             std::shared_ptr<Player> player = std::dynamic_pointer_cast<Player>(other);
 
@@ -95,9 +95,9 @@ void Enemy::OnCollision(std::shared_ptr<Actor> other)
                 data.speedMax = 600;
                 data.damping = 0.2f;
                 data.color = kiko::Color{ 1, 0, 0, 1 };
-                kiko::Transform transform{ { m_transform.position }, m_transform.rotation, 1 };
-                auto emitter = std::make_unique<kiko::Emitter>(transform, data);
-                emitter->m_lifespan = 0.5f;
+                kiko::Transform t{ { transform.position }, transform.rotation, 1 };
+                auto emitter = std::make_unique<kiko::Emitter>(t, data);
+                emitter->lifespan = 0.5f;
                 m_scene->Add(std::move(emitter));
 
                 m_scene->DecrementEnemyCount();
@@ -112,7 +112,7 @@ void Enemy::OnCollision(std::shared_ptr<Actor> other)
 
 Enemy::ePlayerLocation Enemy::FindPlayer(kiko::vec2 forward)
 {
-    float angle = kiko::RadToDeg(kiko::Vector2::SignedAngle(forward.Normalized(), (m_player->m_transform.position - m_transform.position).Normalized()));
+    float angle = kiko::RadToDeg(kiko::Vector2::SignedAngle(forward.Normalized(), (m_player->transform.position - transform.position).Normalized()));
 
     if (angle < -5 && angle > -110)
     {
@@ -138,7 +138,7 @@ Enemy::ePlayerLocation Enemy::FindPlayer(kiko::vec2 forward)
 
 Enemy::ePlayerLocation Enemy::FindPlayer()
 {
-    kiko::vec2 forward = kiko::vec2{ 0, -1 }.Rotate(m_transform.rotation);
+    kiko::vec2 forward = kiko::vec2{ 0, -1 }.Rotate(transform.rotation);
     return FindPlayer(forward);
 }
 

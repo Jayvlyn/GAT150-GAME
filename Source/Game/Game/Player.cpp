@@ -34,10 +34,10 @@ void Player::Update(float dt) {
     else if (m_currentSpeed)                                                    Steer(0);
 
     // Steer Rotations
-    if (m_currentSpeed != 0) m_transform.rotation += (m_rotate * ((m_currentSpeed/100)* m_drive)) * m_turnRate * kiko::g_time.GetDeltaTime();
+    if (m_currentSpeed != 0) transform.rotation += (m_rotate * ((m_currentSpeed/100)* m_drive)) * m_turnRate * kiko::g_time.GetDeltaTime();
 
     // Drifting
-    kiko::vec2 forward = kiko::vec2{ 0, -1 }.Rotate(m_transform.rotation);
+    kiko::vec2 forward = kiko::vec2{ 0, -1 }.Rotate(transform.rotation);
     if (kiko::g_inputSystem.GetKeyDown(SDL_SCANCODE_LSHIFT) && !kiko::g_inputSystem.GetPreviousKeyDown(SDL_SCANCODE_LSHIFT)) {
         m_driftDrive = m_drive;
         m_driftEnginePower = m_enginePower;
@@ -63,12 +63,12 @@ void Player::Update(float dt) {
 
     // Wrapping
     m_wrapped = false; // info for enemies
-    m_lastPosition = m_transform.position;
+    m_lastPosition = transform.position;
 
-    m_transform.position.x = kiko::Wrap(m_transform.position.x, kiko::g_renderer.GetWidth());
-    m_transform.position.y = kiko::Wrap(m_transform.position.y, kiko::g_renderer.GetHeight());
+    transform.position.x = kiko::Wrap(transform.position.x, kiko::g_renderer.GetWidth());
+    transform.position.y = kiko::Wrap(transform.position.y, kiko::g_renderer.GetHeight());
 
-    if (kiko::Mag(m_transform.position - m_lastPosition) > 100.0f) {
+    if (kiko::Mag(transform.position - m_lastPosition) > 100.0f) {
         m_wrapped = true;
     }
 
@@ -95,11 +95,11 @@ void Player::OnCollision(std::shared_ptr<Actor> other)
         m_collision = true; 
         m_collisionTimer = 0.8f;
 
-        if (other->m_tag == "Clock") {
+        if (other->tag == "Clock") {
             other->m_destroyed = true;
         }
 
-        if (other->m_tag == "Enemy")
+        if (other->tag == "Enemy")
         {
             std::shared_ptr<Enemy> enemy = std::dynamic_pointer_cast<Enemy>(other);
 
@@ -135,9 +135,9 @@ void Player::OnCollision(std::shared_ptr<Actor> other)
             data.speedMax = 600;
             data.damping = 0.2f;
             data.color = kiko::Color{ 1, 0.5, 0, 1 };
-            kiko::Transform transform{ { kiko::Lerp(m_transform.position, other->m_transform.position, 0.5)}, m_transform.rotation, 1 };
+            kiko::Transform transform{ { kiko::Lerp(transform.position, other->transform.position, 0.5)}, transform.rotation, 1 };
             auto emitter = std::make_unique<kiko::Emitter>(transform, data);
-            emitter->m_lifespan = 0.1f;
+            emitter->lifespan = 0.1f;
             m_scene->Add(std::move(emitter));
 
             // Health + Death
@@ -156,9 +156,9 @@ void Player::OnCollision(std::shared_ptr<Actor> other)
                 data.speedMax = 600;
                 data.damping = 0.2f;
                 data.color = kiko::Color{ 1, 0.5, 0, 1 };
-                kiko::Transform transform{ { m_transform.position }, m_transform.rotation, 1 };
-                auto emitter = std::make_unique<kiko::Emitter>(transform, data);
-                emitter->m_lifespan = 0.5f;
+                kiko::Transform t{ { transform.position }, transform.rotation, 1 };
+                auto emitter = std::make_unique<kiko::Emitter>(t, data);
+                emitter->lifespan = 0.5f;
                 m_scene->Add(std::move(emitter));
 
                 m_destroyed = true;

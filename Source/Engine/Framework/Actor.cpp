@@ -25,9 +25,9 @@ namespace kiko
 
 	void Actor::Update(float dt)
 	{
-		if (m_lifespan != -1.0f && m_destroyed != true) {
-			m_lifespan -= dt;
-			m_destroyed = (m_lifespan <= 0);
+		if (lifespan != -1.0f && m_destroyed != true) {
+			lifespan -= dt;
+			m_destroyed = (lifespan <= 0);
 		}
 
 		for (auto& component : m_components)
@@ -61,10 +61,13 @@ namespace kiko
 		m_components.push_back(std::move(component));
 	}
 
-	bool Actor::Read(const rapidjson::Value& value)
+	void Actor::Read(const json_t& value)
 	{
+		Object::Read(value);
 
+		READ_DATA(value, tag);
+		READ_DATA(value, lifespan);
 
-		return true;
+		if(HAS_DATA(value, transform)) transform.Read(value);
 	}
 }

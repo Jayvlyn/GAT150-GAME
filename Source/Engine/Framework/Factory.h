@@ -5,7 +5,7 @@
 #include <map>
 #include <string>
 
-#define CREATE_CLASS(classname) kiko::Factory::Instance().Create<kiko::classname>(#classname);
+#define CREATE_CLASS(classname) kiko::Factory::Instance().Create<kiko::classname>(#classname)
 
 namespace kiko
 {

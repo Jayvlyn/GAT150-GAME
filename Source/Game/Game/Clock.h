@@ -11,7 +11,7 @@ public:
         m_time{ time }
     {
         m_collision = false;
-        m_lifespan = 20.0f;
+        lifespan = 20.0f;
         m_model = model;
     }
 

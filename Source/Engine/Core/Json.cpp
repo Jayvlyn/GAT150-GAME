@@ -25,7 +25,7 @@ namespace kiko
 		}
 		return true;
 	}
-	bool Json::Read(const rapidjson::Value& value, const std::string& name, int& data, bool required)
+	bool Json::Read(const json_t& value, const std::string& name, int& data, bool required)
 	{
 		if (!value.HasMember(name.c_str()) || !value[name.c_str()].IsInt())
 		{
@@ -35,7 +35,7 @@ namespace kiko
 		data = value[name.c_str()].GetInt();
 		return true;
 	}
-	bool Json::Read(const rapidjson::Value& value, const std::string& name, float& data, bool required)
+	bool Json::Read(const json_t& value, const std::string& name, float& data, bool required)
 	{
 		if (!value.HasMember(name.c_str()) || !value[name.c_str()].IsFloat())
 		{
@@ -44,7 +44,7 @@ namespace kiko
 		}
 		data = value[name.c_str()].GetFloat();
 	}
-	bool Json::Read(const rapidjson::Value& value, const std::string& name, bool& data, bool required)
+	bool Json::Read(const json_t& value, const std::string& name, bool& data, bool required)
 	{
 		if (!value.HasMember(name.c_str()) || !value[name.c_str()].IsBool())
 		{
@@ -53,7 +53,7 @@ namespace kiko
 		}
 		data = value[name.c_str()].GetBool();
 	}
-	bool Json::Read(const rapidjson::Value& value, const std::string& name, std::string& data, bool required)
+	bool Json::Read(const json_t& value, const std::string& name, std::string& data, bool required)
 	{
 		if (!value.HasMember(name.c_str()) || !value[name.c_str()].IsString())
 		{
@@ -62,7 +62,7 @@ namespace kiko
 		}
 		data = value[name.c_str()].GetString();
 	}
-	bool Json::Read(const rapidjson::Value& value, const std::string& name, vec2& data, bool required)
+	bool Json::Read(const json_t& value, const std::string& name, vec2& data, bool required)
 	{
 		// check if 'name' member exists and is an array with 2 elements
 		if (!value.HasMember(name.c_str()) || !value[name.c_str()].IsArray() || value[name.c_str()].Size() != 2)

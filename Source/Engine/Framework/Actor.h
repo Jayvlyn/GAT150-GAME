@@ -11,12 +11,12 @@ namespace kiko {
 	{
 
 	public:
-		CLASS_DECLARATION(Actor);
+		CLASS_DECLARATION(Actor)
 
 		Actor() = default;
 
 		Actor(const kiko::Transform& transform) :
-			m_transform{ transform }
+			transform{ transform }
 		{}
 
 		virtual bool Initialize() override;
@@ -38,9 +38,10 @@ namespace kiko {
 
 		class Game* m_game = nullptr;
 
-		Transform m_transform;
-		std::string m_tag;
-		float m_lifespan = -1.0f;
+	public:
+		Transform transform;
+		std::string tag;
+		float lifespan = -1.0f;
 
 		bool m_destroyed = false;
 	protected:
