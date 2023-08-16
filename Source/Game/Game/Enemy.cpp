@@ -67,9 +67,9 @@ void Enemy::Update(float dt) {
 
 void Enemy::OnCollision(std::shared_ptr<Actor> other)
 {
-    if (!m_collision) {
-        m_collision = true; // TURNS OFF COLLISION, MAKE TINY SHORT TIMER TO SET IT BACK TO FALSE
-        m_collisionTimer = 0.8f;
+    if (!collision) {
+        collision = true; // TURNS OFF COLLISION, MAKE TINY SHORT TIMER TO SET IT BACK TO FALSE
+        collisionTimer = 0.8f;
 
         if (other->tag == "Player") {
             
@@ -103,7 +103,7 @@ void Enemy::OnCollision(std::shared_ptr<Actor> other)
                 m_scene->DecrementEnemyCount();
 
 
-                m_destroyed = true;
+                destroyed = true;
 
             }
         }

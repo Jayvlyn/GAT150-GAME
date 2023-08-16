@@ -43,19 +43,19 @@ namespace kiko {
 		std::string tag;
 		float lifespan = -1.0f;
 
-		bool m_destroyed = false;
+		bool destroyed = false;
 	protected:
-		std::vector<std::unique_ptr<Component>> m_components;
+		std::vector<std::unique_ptr<Component>> components;
 
-		bool m_collision = false;
-		float m_collisionTimer = 0;
+		bool collision = false;
+		float collisionTimer = 0;
 	};
 
 
 	template<typename T>
 	inline T* Actor::GetComponent()
 	{
-		for (auto& component : m_components)
+		for (auto& component : components)
 		{
 			T* result = dynamic_cast<T*>(component.get());
 			if (result) return result;

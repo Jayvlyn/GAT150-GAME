@@ -16,9 +16,6 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Weapon.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="DrivingGame.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -34,9 +31,6 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Enemy.h">
-      <Filter>Source</Filter>
-    </ClInclude>
-    <ClInclude Include="Weapon.h">
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="DrivingGame.h">

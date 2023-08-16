@@ -91,12 +91,12 @@ void Player::Update(float dt) {
 
 void Player::OnCollision(std::shared_ptr<Actor> other) 
 {
-    if (!m_collision) {
-        m_collision = true; 
-        m_collisionTimer = 0.8f;
+    if (!collision) {
+        collision = true; 
+        collisionTimer = 0.8f;
 
         if (other->tag == "Clock") {
-            other->m_destroyed = true;
+            other->destroyed = true;
         }
 
         if (other->tag == "Enemy")
@@ -161,7 +161,7 @@ void Player::OnCollision(std::shared_ptr<Actor> other)
                 emitter->lifespan = 0.5f;
                 m_scene->Add(std::move(emitter));
 
-                m_destroyed = true;
+                destroyed = true;
                 dynamic_cast<DrivingGame*>(m_game)->SetState(DrivingGame::eState::PlayerDeadStart);
 
             }

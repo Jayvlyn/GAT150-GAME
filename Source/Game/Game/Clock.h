@@ -10,7 +10,7 @@ public:
         kiko::Actor{ transform },
         m_time{ time }
     {
-        m_collision = false;
+        collision = false;
         lifespan = 20.0f;
         m_model = model;
     }
