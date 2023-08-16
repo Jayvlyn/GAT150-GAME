@@ -11,6 +11,7 @@ namespace kiko {
 	{
 
 	public:
+		CLASS_DECLARATION(Actor);
 
 		Actor() = default;
 

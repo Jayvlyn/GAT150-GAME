@@ -142,6 +142,7 @@
     <ClCompile Include="Components\PhysicsComponent.cpp" />
     <ClCompile Include="Components\SpriteComponent.cpp" />
     <ClCompile Include="Emitter.cpp" />
+    <ClCompile Include="Object.cpp" />
     <ClCompile Include="Scene.cpp" />
   </ItemGroup>
   <ItemGroup>

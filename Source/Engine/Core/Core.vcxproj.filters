@@ -25,7 +25,6 @@
     <ClInclude Include="Core.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Logger.h" />
     <ClInclude Include="Vector2.h">
       <Filter>Source\Math</Filter>
     </ClInclude>
@@ -48,6 +47,9 @@
       <Filter>Source\Math</Filter>
     </ClInclude>
     <ClInclude Include="Json.h">
+      <Filter>Source</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>
