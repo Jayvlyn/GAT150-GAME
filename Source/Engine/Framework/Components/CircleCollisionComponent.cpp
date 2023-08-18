@@ -14,6 +14,8 @@ namespace kiko
 
         return (distance <= radius);
     }
+
+    void CircleCollisionComponent::Read(const json_t& value) {}
 }
 
 

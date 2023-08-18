@@ -49,6 +49,8 @@ bool DrivingGame::Init()
 
 	// Scene
 	m_scene = std::make_unique<kiko::Scene>();
+	m_scene->Load("Scene.json");
+	m_scene->Initialize();
 
 	return true;
 }
@@ -189,6 +191,8 @@ void DrivingGame::Update(float dt)
 
 void DrivingGame::Draw(kiko::Renderer& renderer)
 {
+	m_scene->Draw(renderer);
+
 	if (m_state == eState::Title) {
 		m_titleText->Draw(renderer, 40, renderer.GetHeight() / 2);
 		m_startPromptText->Draw(renderer, 40, renderer.GetHeight() / 2 + 40);
@@ -204,5 +208,4 @@ void DrivingGame::Draw(kiko::Renderer& renderer)
 	}
 
 	m_healthText->Draw(renderer, 40, 40);
-	m_scene->Draw(renderer);
 }

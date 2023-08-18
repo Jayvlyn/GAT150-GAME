@@ -27,7 +27,7 @@ namespace kiko
 	}
 	bool Json::Read(const json_t& value, const std::string& name, int& data, bool required)
 	{
-		if (!value.HasMember(name.c_str()) || !value[name.c_str()].IsInt())
+		if (!value.HasMember(name.c_str()) || !value[name.c_str()].IsNumber())
 		{
 			if (required) ERROR_LOG("Cannot read required json data: " << name.c_str());
 			return false;
@@ -37,7 +37,7 @@ namespace kiko
 	}
 	bool Json::Read(const json_t& value, const std::string& name, float& data, bool required)
 	{
-		if (!value.HasMember(name.c_str()) || !value[name.c_str()].IsFloat())
+		if (!value.HasMember(name.c_str()) || !value[name.c_str()].IsNumber())
 		{
 			if (required) ERROR_LOG("Cannot read required json data: " << name.c_str());
 			return false;
