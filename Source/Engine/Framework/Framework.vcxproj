@@ -144,6 +144,7 @@
     <ClCompile Include="Emitter.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="TextRenderComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
@@ -164,6 +165,7 @@
     <ClInclude Include="Resource\ResourceManager.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Singleton.h" />
+    <ClInclude Include="TextRenderComponent.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

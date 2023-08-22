@@ -1,36 +1,44 @@
 {
-	"actors": [
-		{
-			"type": "Actor",
-			"name": "Background",
-			"persistent": true,
-			"transform": {
-				"position": [ 400, 300 ],
-				"scale": 1.0,
-				"rotation": 0
-			},
-			"components": [
-				{
-					"type": "SpriteComponent",
-					"textureName": "Background.png"
-				}
-			]
-		}
-		{
-			"type": "Enemy",
-			"name": "Enemy Car",
-			"persistent": true,
-			"transform": {
-				"position": [ 400, 300 ],
-				"scale": 1.0,
-				"rotation": 0
-			},
-			"components": [
-				{
-					"type": "SpriteComponent",
-					"textureName": "Car2.png"
-				}
-			]
-		}
-	]
+  "actors": [
+    {
+      "type": "Actor",
+      "name": "Background",
+      "persistent": true,
+      "transform": {
+        "position": [
+          400,
+          300
+        ],
+        "scale": 1.0,
+        "rotation": 0
+      },
+      "components": [
+        {
+          "type": "SpriteComponent",
+          "textureName": "Background.png"
+        }
+      ]
+    }, 
+    {
+      "type": "Actor",
+      "name": "Title",
+      "persistent": true,
+      "transform": {
+        "position": [
+          400,
+          300
+        ],
+        "scale": 2,
+        "rotation": 0
+      },
+      "components": [
+        {
+          "type": "TextRenderComponent",
+          "fontName": "Coalition_v2..ttf",
+          "fontSize": 24,
+          "text": "I LOVE DRIFTING IN TIME"
+        }
+      ]
+    }
+  ]
 }
