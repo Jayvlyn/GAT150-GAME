@@ -5,6 +5,7 @@
 #include "Framework/Framework.h"
 #include <iostream>
 
+
 void Enemy::Update(float dt) {
     Car::Update(dt);
 
@@ -101,7 +102,6 @@ void Enemy::OnCollision(std::shared_ptr<Actor> other)
                 m_scene->Add(std::move(emitter));
 
                 m_scene->DecrementEnemyCount();
-
 
                 destroyed = true;
 

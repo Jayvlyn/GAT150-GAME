@@ -14,6 +14,8 @@
 
 #include "Core/Vector2.h"
 
+#include "Physics/PhysicsSystem.h"
+
 #include <thread>
 #include <vector>
 #include <iostream>
@@ -65,6 +67,7 @@ int main(int argc, char* argv[])
 
     kiko::g_inputSystem.Initialize();
     kiko::g_audioSystem.Initialize();
+    kiko::PhysicsSystem::Instance().Initialize();
 
     // Create Game
     unique_ptr<DrivingGame> game = make_unique<DrivingGame>();

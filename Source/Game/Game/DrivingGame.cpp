@@ -65,6 +65,7 @@ void DrivingGame::Update(float dt)
 		if (kiko::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE))
 		{
 			m_state = eState::StartGame;
+			//m_scene->GetActorByName("Background")->active;
 		}
 		break;
 	case eState::StartGame:

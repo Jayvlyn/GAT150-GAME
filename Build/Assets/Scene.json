@@ -3,6 +3,7 @@
 		{
 			"type": "Actor",
 			"name": "Background",
+			"persistent": true,
 			"transform": {
 				"position": [ 400, 300 ],
 				"scale": 1.0,
@@ -12,6 +13,22 @@
 				{
 					"type": "SpriteComponent",
 					"textureName": "Background.png"
+				}
+			]
+		}
+		{
+			"type": "Enemy",
+			"name": "Enemy Car",
+			"persistent": true,
+			"transform": {
+				"position": [ 400, 300 ],
+				"scale": 1.0,
+				"rotation": 0
+			},
+			"components": [
+				{
+					"type": "SpriteComponent",
+					"textureName": "Car2.png"
 				}
 			]
 		}
