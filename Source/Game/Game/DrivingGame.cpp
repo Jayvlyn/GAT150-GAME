@@ -52,6 +52,8 @@ bool DrivingGame::Init()
 	m_scene->Load("Scene.json");
 	m_scene->Initialize();
 
+	// add events
+
 	return true;
 }
 
@@ -209,4 +211,9 @@ void DrivingGame::Draw(kiko::Renderer& renderer)
 	}
 
 	m_healthText->Draw(renderer, 40, 40);
+}
+
+void DrivingGame::OnPlayerDead(const kiko::Event& event)
+{
+	m_state = eState::PlayerDeadStart;
 }

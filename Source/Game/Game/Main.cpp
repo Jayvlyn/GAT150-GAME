@@ -23,11 +23,65 @@
 #include <cassert>
 #include <array>
 #include <map>
+#include <functional>
 
 using namespace std;
 
+void print(int i)
+{
+    cout << i << endl;
+}
+
+int add(int i1, int i2)
+{
+    return i1 + i2;
+}
+
+int sub(int i1, int i2)
+{
+    return i1 - i2;
+}
+
+class A
+{
+public:
+    int add(int i1, int i2)
+    {
+        return i1 + i2;
+    }
+};
+
+union Data
+{
+    int i;
+    bool b;
+    char c[6];
+};
+
+
+
 int main(int argc, char* argv[])
 {
+    Data data;
+    data.b = true;
+    cout << data.b << endl;
+
+    void (*func_ptr)(int) = &print;
+    func_ptr(5);
+
+    int (*op_ptr)(int, int);
+    op_ptr = add;
+
+    cout << op_ptr(4, 4) << endl;
+
+    std::function<int(int, int)> op;
+    op = add;
+    cout << op(5, 6) << endl;
+
+    A a;
+    op = std::bind(&A::add, &a, std::placeholders::_1, std::placeholders::_2);
+    cout << op(6, 6) << endl;
+
 
     kiko::MemoryTracker::Initialize();
     kiko::seedRandom((unsigned int)time(nullptr));
@@ -87,6 +141,7 @@ int main(int argc, char* argv[])
         kiko::g_audioSystem.Update();
         kiko::g_inputSystem.Update();
         kiko::g_particleSystem.Update(kiko::g_time.GetDeltaTime());
+        kiko::PhysicsSystem::Instance().Update(kiko::g_time.GetDeltaTime());
 
         if (kiko::g_inputSystem.GetKeyDown(SDL_SCANCODE_ESCAPE)) quit = true;
 

@@ -1,9 +1,10 @@
 #pragma once
 #include "Framework/Game.h"
+#include "Framework/Event/EventManager.h"
 #include "Renderer/Text.h"
 #include "Core/Time.h"
 
-class DrivingGame : public kiko::Game
+class DrivingGame : public kiko::Game, kiko::IEventListener
 {
 public:
 	enum class eState
@@ -28,6 +29,7 @@ public:
 	virtual void Draw(kiko::Renderer& renderer) override;
 
 	void SetState(eState state) { m_state = state; }
+	void OnPlayerDead(const kiko::Event& event);
 
 	
 

@@ -18,7 +18,12 @@
 // Collision
 #include "Components/CollisionComponent.h"
 #include "Components/CircleCollisionComponent.h"
+#include "Components/Box2DCollisionComponent.h"
+#include "Components/Box2DPhysicsComponent.h"
 
 // Resource
 #include "Resource/Resource.h"
 #include "Resource/ResourceManager.h"
+
+#include "Event/EventManager.h"
+

@@ -43,6 +43,7 @@ namespace kiko
 			return false;
 		}
 		data = value[name.c_str()].GetFloat();
+		return false;
 	}
 	bool Json::Read(const json_t& value, const std::string& name, bool& data, bool required)
 	{
@@ -52,6 +53,7 @@ namespace kiko
 			return false;
 		}
 		data = value[name.c_str()].GetBool();
+		return false;
 	}
 	bool Json::Read(const json_t& value, const std::string& name, std::string& data, bool required)
 	{
@@ -61,6 +63,7 @@ namespace kiko
 			return false;
 		}
 		data = value[name.c_str()].GetString();
+		return false;
 	}
 	bool Json::Read(const json_t& value, const std::string& name, vec2& data, bool required)
 	{
