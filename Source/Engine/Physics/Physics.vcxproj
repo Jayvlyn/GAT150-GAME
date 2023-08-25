@@ -88,7 +88,7 @@
     </Link>
     <Lib>
       <AdditionalDependencies>box2d.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ThirdPartyDir)box2d\lib;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ThirdPartyDir)box2d\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -109,7 +109,7 @@
     </Link>
     <Lib>
       <AdditionalDependencies>box2d.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ThirdPartyDir)box2d\lib;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ThirdPartyDir)box2d\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -126,7 +126,7 @@
     </Link>
     <Lib>
       <AdditionalDependencies>box2d.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ThirdPartyDir)box2d\lib;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ThirdPartyDir)box2d\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -147,13 +147,15 @@
     </Link>
     <Lib>
       <AdditionalDependencies>box2d.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ThirdPartyDir)box2d\lib;</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ThirdPartyDir)box2d\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ContactListener.cpp" />
     <ClCompile Include="PhysicsSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ContactListener.h" />
     <ClInclude Include="PhysicsSystem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

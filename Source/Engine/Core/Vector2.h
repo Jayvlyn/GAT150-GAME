@@ -107,7 +107,6 @@ namespace kiko {
 	}
 
 
-
 	// get the dot product beteen v1 and v2 https://www.falstad.com/dotproduct/
 	inline float Vector2::Dot(const Vector2& v1, const Vector2& v2)
 	{

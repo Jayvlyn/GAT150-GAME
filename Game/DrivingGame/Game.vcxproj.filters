@@ -22,9 +22,6 @@
     <ClCompile Include="DrivingGame.cpp">
       <Filter>Source</Filter>
     </ClCompile>
-    <ClCompile Include="Clock.cpp">
-      <Filter>Source</Filter>
-    </ClCompile>
     <ClCompile Include="Car.cpp">
       <Filter>Source</Filter>
     </ClCompile>
@@ -39,15 +36,15 @@
     <ClInclude Include="DrivingGame.h">
       <Filter>Source</Filter>
     </ClInclude>
-    <ClInclude Include="Clock.h">
-      <Filter>Source</Filter>
-    </ClInclude>
     <ClInclude Include="Car.h">
       <Filter>Source</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\Build\Assets\Scene.json">
+      <Filter>Resource</Filter>
+    </None>
+    <None Include="..\..\..\Build\Assets\Storage.json">
       <Filter>Resource</Filter>
     </None>
   </ItemGroup>

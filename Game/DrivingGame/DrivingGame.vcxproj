@@ -60,18 +60,22 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\PropertySheets\Common.props" />
+    <Import Project="..\..\Source\PropertySheets\Common.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\PropertySheets\Common.props" />
+    <Import Project="..\..\Source\PropertySheets\Common.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\PropertySheets\Common.props" />
+    <Import Project="..\..\Source\PropertySheets\Common.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\PropertySheets\Common.props" />
+    <Import Project="..\..\Source\PropertySheets\Common.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -165,41 +169,40 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Car.cpp" />
-    <ClCompile Include="Clock.cpp" />
     <ClCompile Include="DrivingGame.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Engine\Audio\Audio.vcxproj">
+    <ProjectReference Include="..\..\Source\Engine\Audio\Audio.vcxproj">
       <Project>{64d0fa3b-c528-4991-bcf7-bccae788f5bc}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\Engine\Core\Core.vcxproj">
+    <ProjectReference Include="..\..\Source\Engine\Core\Core.vcxproj">
       <Project>{796f01cd-3a78-48e2-91f6-d316f564b864}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\Engine\Framework\Framework.vcxproj">
+    <ProjectReference Include="..\..\Source\Engine\Framework\Framework.vcxproj">
       <Project>{d16d3dee-585b-4324-b8b7-c0871ae23c86}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\Engine\Input\Input.vcxproj">
+    <ProjectReference Include="..\..\Source\Engine\Input\Input.vcxproj">
       <Project>{51e9c0ab-2a1c-49c7-9dd4-3fe74ca56077}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\Engine\Physics\Physics.vcxproj">
+    <ProjectReference Include="..\..\Source\Engine\Physics\Physics.vcxproj">
       <Project>{1959aee6-95c9-426c-ae03-4260fe6e2c64}</Project>
     </ProjectReference>
-    <ProjectReference Include="..\..\Engine\Renderer\Renderer.vcxproj">
+    <ProjectReference Include="..\..\Source\Engine\Renderer\Renderer.vcxproj">
       <Project>{7f434907-7122-4d29-a48f-9a5f2066135a}</Project>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Car.h" />
-    <ClInclude Include="Clock.h" />
     <ClInclude Include="DrivingGame.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Player.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\Build\Assets\Scene.json" />
+    <None Include="..\..\..\Build\Assets\Storage.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

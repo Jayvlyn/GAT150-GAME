@@ -1,0 +1,83 @@
+{
+  "actors": [
+    {
+      "type": "Actor",
+      "name": "Background",
+      "persistent": true,
+      "transform": {
+        "position": [
+          400,
+          300
+        ],
+        "scale": 1.0,
+        "rotation": 0
+      },
+      "components": [
+        {
+          "type": "SpriteComponent",
+          "textureName": "Background.png"
+        }
+      ]
+    },
+    {
+      "type": "Actor",
+      "name": "Title",
+      "persistent": true,
+      "transform": {
+        "position": [
+          400,
+          300
+        ],
+        "scale": 2,
+        "rotation": 0
+      },
+      "components": [
+        {
+          "type": "TextRenderComponent",
+          "fontName": "Coalition_v2..ttf",
+          "fontSize": 24,
+          "text": "I LOVE DRIFTING IN TIME"
+        }
+      ]
+    },
+    {
+      "type": "Player",
+      "name": "Player",
+      "prototype": true,
+      "tag": "Player",
+      "transform": {
+        "position": [
+          400,
+          300
+        ],
+        "scale": 1,
+        "rotation": 0
+      },
+      "enginePower": 5,
+      "acceleration": 1,
+      "brakePower": 1,
+      "turnRate": 1,
+      "maxSpeed": 20,
+      "health": 100,
+      "components": [
+        {
+          "type": "SpriteComponent",
+          "textureName": "Car1.png"
+        },
+        {
+          "type": "Box2DPhysicsComponent",
+          "damping": 0.98,
+          "angularDamping": 2,
+          "gravityScale": 0
+        },
+        {
+          "type": "Box2DCollisionComponent",
+          "size": [
+            32,
+            32
+          ]
+        }
+      ]
+    }
+  ]
+}

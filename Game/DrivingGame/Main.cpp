@@ -27,93 +27,11 @@
 
 using namespace std;
 
-void print(int i)
-{
-    cout << i << endl;
-}
-
-int add(int i1, int i2)
-{
-    return i1 + i2;
-}
-
-int sub(int i1, int i2)
-{
-    return i1 - i2;
-}
-
-class A
-{
-public:
-    int add(int i1, int i2)
-    {
-        return i1 + i2;
-    }
-};
-
-union Data
-{
-    int i;
-    bool b;
-    char c[6];
-};
-
-
-
 int main(int argc, char* argv[])
 {
-    Data data;
-    data.b = true;
-    cout << data.b << endl;
-
-    void (*func_ptr)(int) = &print;
-    func_ptr(5);
-
-    int (*op_ptr)(int, int);
-    op_ptr = add;
-
-    cout << op_ptr(4, 4) << endl;
-
-    std::function<int(int, int)> op;
-    op = add;
-    cout << op(5, 6) << endl;
-
-    A a;
-    op = std::bind(&A::add, &a, std::placeholders::_1, std::placeholders::_2);
-    cout << op(6, 6) << endl;
-
-
     kiko::MemoryTracker::Initialize();
     kiko::seedRandom((unsigned int)time(nullptr));
     kiko::setFilePath("assets");
-
-    rapidjson::Document document;
-    kiko::Json::Load("json.txt", document);
-
-    int i1;
-    kiko::Json::Read(document, "integer1", i1);
-    std::cout << i1 << std::endl;
-
-    int i2;
-    kiko::Json::Read(document, "integer2", i2);
-    std::cout << i2 << std::endl;
-
-    std::string str;
-    kiko::Json::Read(document, "string", str);
-    std::cout << str << std::endl;
-
-    bool b;
-    kiko::Json::Read(document, "boolean", b);
-    std::cout << b << std::endl;
-
-    float f;
-    kiko::Json::Read(document, "float", f);
-    std::cout << f << std::endl;
-
-    kiko::vec2 v2;
-    kiko::Json::Read(document, "vector2", v2);
-    std::cout << v2 << std::endl;
-
 
     // Initialize engine
     kiko::g_renderer.Initialize();

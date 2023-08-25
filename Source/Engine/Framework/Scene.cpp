@@ -32,8 +32,8 @@ namespace kiko
 
 				if (collision1->CheckCollision(collision2))
 				{
-					(*iter1)->OnCollision(iter2->get());
-					(*iter2)->OnCollision(iter1->get());
+					(*iter1)->OnCollisionEnter(iter2->get());
+					(*iter2)->OnCollisionEnter(iter1->get());
 				}
 			}
 		}
