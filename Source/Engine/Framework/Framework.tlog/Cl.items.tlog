@@ -5,7 +5,9 @@ C:\Neumont\Q4\GAT150\GAT150-GAME\Source\Engine\Framework\Components\CircleCollis
 C:\Neumont\Q4\GAT150\GAT150-GAME\Source\Engine\Framework\Components\EnginePhysicsComponent.cpp
 C:\Neumont\Q4\GAT150\GAT150-GAME\Source\Engine\Framework\Components\ModelRenderComponent.cpp
 C:\Neumont\Q4\GAT150\GAT150-GAME\Source\Engine\Framework\Components\PhysicsComponent.cpp
+C:\Neumont\Q4\GAT150\GAT150-GAME\Source\Engine\Framework\Components\SpriteAnimRenderComponent.cpp
 C:\Neumont\Q4\GAT150\GAT150-GAME\Source\Engine\Framework\Components\SpriteComponent.cpp
+C:\Neumont\Q4\GAT150\GAT150-GAME\Source\Engine\Framework\Components\TilemapComponent.cpp
 C:\Neumont\Q4\GAT150\GAT150-GAME\Source\Engine\Framework\Emitter.cpp
 C:\Neumont\Q4\GAT150\GAT150-GAME\Source\Engine\Framework\Event\EventManager.cpp
 C:\Neumont\Q4\GAT150\GAT150-GAME\Source\Engine\Framework\Object.cpp

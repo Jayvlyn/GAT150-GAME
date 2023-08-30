@@ -52,6 +52,9 @@
     <ClInclude Include="Logger.h">
       <Filter>Source</Filter>
     </ClInclude>
+    <ClInclude Include="Rect.h">
+      <Filter>Source\Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FileIO.cpp">

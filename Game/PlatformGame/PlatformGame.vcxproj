@@ -137,6 +137,7 @@
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="PlatformGame.cpp" />
+    <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Source\Engine\Audio\Audio.vcxproj">
@@ -160,9 +161,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlatformGame.h" />
+    <ClInclude Include="Player.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Build\Assets\PlatformGame\Scenes\PlatformScene.json" />
+    <None Include="..\..\Build\Assets\PlatformGame\Scenes\Player.json" />
+    <None Include="..\..\Build\Assets\PlatformGame\Scenes\tilemap.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

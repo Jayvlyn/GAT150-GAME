@@ -7,8 +7,8 @@
 #include "Memory.h"
 #include "Time.h"
 
-
 #include "Color.h"
+#include "Rect.h"
 #include "Vector2.h"
 #include "Vector3.h"
 #include "Transform.h"

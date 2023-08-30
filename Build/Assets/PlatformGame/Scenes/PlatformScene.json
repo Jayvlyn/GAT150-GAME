@@ -2,6 +2,38 @@
   "actors": [
     {
       "type": "Actor",
+      "name": "Background",
+      "persistent": true,
+      "transform": {
+        "position": [ 800, 450 ],
+        "scale": 5.9,
+        "rotation": 0
+      },
+      "components": [
+        {
+          "type": "SpriteComponent",
+          "textureName": "Textures/parallax-mountain-bg.png"
+        },
+        {
+          "type": "SpriteComponent",
+          "textureName": "Textures/parallax-mountain-montain-far.png"
+        },
+        {
+          "type": "SpriteComponent",
+          "textureName": "Textures/parallax-mountain-mountains.png"
+        },
+        {
+          "type": "SpriteComponent",
+          "textureName": "Textures/parallax-mountain-trees.png"
+        },
+        {
+          "type": "SpriteComponent",
+          "textureName": "Textures/parallax-mountain-foreground-trees.png"
+        }
+      ]
+    },
+    {
+      "type": "Actor",
       "name": "Title",
       "persistent": true,
       "transform": {
@@ -17,7 +49,47 @@
           "type": "TextRenderComponent",
           "fontName": "Fonts/Coalition_v2..ttf",
           "fontSize": 24,
-          "text": "PLATFORMER GAME!"
+          "text": "Darkest Souls",
+          "color": [ 1, 0, 0, 1 ]
+        }
+      ]
+    },
+    {
+      "type": "Actor",
+      "name": "Coin",
+      "persistent": false,
+      "prototype": true,
+      "transform": {
+        "position": [ 0, 0 ],
+        "scale": 1,
+        "rotation": 0
+      },
+      "components": [
+        {
+          "type": "SpriteAnimRenderComponent",
+          "defaultSequence": "idle",
+          "sequences": [
+            {
+              "name": "idle",
+              "fps": 12,
+              "numColumns": 8,
+              "numRows": 1,
+              "startFrame": 1,
+              "endFrame": 8,
+              "textureName": "Textures/coin.png"
+            }
+          ],
+          "textureName": "Textures/coin.png"
+        },
+        {
+          "type": "Box2DPhysicsComponent",
+          "constrainAngle": true,
+          "gravityScale": 0
+        },
+        {
+          "type": "Box2DCollisionComponent",
+          "restitution": 0.1,
+          "isTrigger": true
         }
       ]
     }

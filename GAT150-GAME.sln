@@ -21,8 +21,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Game", "Game", "{A5A51E29-1
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PlatformGame", "Game\PlatformGame\PlatformGame.vcxproj", "{1F2A5400-2E83-4B83-9BEA-AD725BED0B62}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DrivingGame", "Game\DrivingGame\DrivingGame.vcxproj", "{C4E02687-955B-4187-8B4C-DBECAE80DB2F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -87,14 +85,6 @@ Global
 		{1F2A5400-2E83-4B83-9BEA-AD725BED0B62}.Release|x64.Build.0 = Release|x64
 		{1F2A5400-2E83-4B83-9BEA-AD725BED0B62}.Release|x86.ActiveCfg = Release|Win32
 		{1F2A5400-2E83-4B83-9BEA-AD725BED0B62}.Release|x86.Build.0 = Release|Win32
-		{C4E02687-955B-4187-8B4C-DBECAE80DB2F}.Debug|x64.ActiveCfg = Debug|x64
-		{C4E02687-955B-4187-8B4C-DBECAE80DB2F}.Debug|x64.Build.0 = Debug|x64
-		{C4E02687-955B-4187-8B4C-DBECAE80DB2F}.Debug|x86.ActiveCfg = Debug|Win32
-		{C4E02687-955B-4187-8B4C-DBECAE80DB2F}.Debug|x86.Build.0 = Debug|Win32
-		{C4E02687-955B-4187-8B4C-DBECAE80DB2F}.Release|x64.ActiveCfg = Release|x64
-		{C4E02687-955B-4187-8B4C-DBECAE80DB2F}.Release|x64.Build.0 = Release|x64
-		{C4E02687-955B-4187-8B4C-DBECAE80DB2F}.Release|x86.ActiveCfg = Release|Win32
-		{C4E02687-955B-4187-8B4C-DBECAE80DB2F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -107,7 +97,6 @@ Global
 		{7F434907-7122-4D29-A48F-9A5F2066135A} = {04A4049C-F2E1-42E5-83B0-B132D0EB7306}
 		{1959AEE6-95C9-426C-AE03-4260FE6E2C64} = {04A4049C-F2E1-42E5-83B0-B132D0EB7306}
 		{1F2A5400-2E83-4B83-9BEA-AD725BED0B62} = {A5A51E29-1098-4E11-94E5-AE677A68E1A6}
-		{C4E02687-955B-4187-8B4C-DBECAE80DB2F} = {A5A51E29-1098-4E11-94E5-AE677A68E1A6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D19D489D-9637-46FB-B74F-7B991DF5EE66}

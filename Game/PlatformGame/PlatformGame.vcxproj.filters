@@ -17,14 +17,26 @@
     <ClCompile Include="PlatformGame.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlatformGame.h">
       <Filter>Source</Filter>
     </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Source</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\Build\Assets\PlatformGame\Scenes\PlatformScene.json">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="..\..\Build\Assets\PlatformGame\Scenes\tilemap.json">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="..\..\Build\Assets\PlatformGame\Scenes\Player.json">
       <Filter>Resources</Filter>
     </None>
   </ItemGroup>

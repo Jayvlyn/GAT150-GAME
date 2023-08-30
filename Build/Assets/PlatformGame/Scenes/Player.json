@@ -1,0 +1,66 @@
+{
+  "actors": [
+    {
+      "type": "Player",
+      "name": "Player",
+      "tag":  "Player",
+      "persistent": true,
+      "speed": 15,
+      "jump": 750,
+      "transform": {
+        "position": [ 440, 300 ],
+        "scale": 2,
+        "rotation": 0
+      },
+      "components": [
+        {
+          "type": "SpriteAnimRenderComponent",
+          "origin": [0.5, 0.6],
+          "defaultSequenceName": "idle",
+          "sequences": [
+            {
+              "name": "idle",
+              "fps": 12,
+              "numColumns": 4,
+              "numRows": 1,
+              "startFrame": 1,
+              "endFrame": 4,
+              "textureName": "Textures/gothic-hero-idle.png"
+            },
+            {
+              "name": "run",
+              "fps": 12,
+              "numColumns": 12,
+              "numRows": 1,
+              "startFrame": 1,
+              "endFrame": 12,
+              "textureName": "Textures/gothic-hero-run.png"
+            },
+            {
+              "name": "fall",
+              "fps": 12,
+              "numColumns": 1,
+              "numRows": 1,
+              "startFrame": 1,
+              "endFrame": 1,
+              "loop": false,
+              "textureName": "Textures/gothic-hero-fall.png"
+            }
+          ],
+          "textureName": "Textures/gothic-hero-idle.png"
+        },
+        {
+          "type": "Box2DPhysicsComponent",
+          "constrainAngle": true
+        },
+        {
+          "type": "Box2DCollisionComponent",
+          "restitution": 0,
+          "friction": 0.5,
+          "size": [20,40]
+
+        }
+      ]
+    }
+  ]
+}

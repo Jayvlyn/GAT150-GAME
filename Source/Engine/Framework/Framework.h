@@ -14,6 +14,8 @@
 #include "Components/ModelRenderComponent.h"
 #include "Components/PhysicsComponent.h"
 #include "Components/EnginePhysicsComponent.h"
+#include "Components/SpriteAnimRenderComponent.h"
+#include "Components/TilemapComponent.h"
 
 // Collision
 #include "Components/CollisionComponent.h"

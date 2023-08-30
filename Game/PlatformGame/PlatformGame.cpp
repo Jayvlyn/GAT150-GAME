@@ -31,11 +31,20 @@ void PlatformGame::Shutdown() {}
 
 void PlatformGame::Update(float dt)
 {
+	
 	switch (m_state)
 	{
 	case eState::Title:
+		if (kiko::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE)) {
+			m_scene->GetActorByName("Title")->active = false;
+			m_state = eState::StartGame;
+		}
 		break;
 	case eState::StartGame:
+		m_scene->Load("Scenes/tilemap.json");
+		m_scene->Load("Scenes/Player.json");
+		m_scene->Initialize();
+		m_state = eState::Game;
 		break;
 	case eState::StartLevel:
 		break;
