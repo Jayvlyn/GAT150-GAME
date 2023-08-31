@@ -3,6 +3,8 @@
 #include "Input/InputSystem.h"
 #include "Framework/Framework.h"
 #include "Renderer/Renderer.h"
+#include "PlatformGame.h"
+#include "Audio/AudioSystem.h"
 
 namespace kiko
 {
@@ -14,6 +16,9 @@ namespace kiko
 
 		m_physicsComponent = GetComponent<PhysicsComponent>();
 		m_spriteAnimComponent = GetComponent<SpriteAnimRenderComponent>();
+
+		m_spriteAnimComponent->SetSequence("fall"); // Player starts in air
+
 		return true;
 	}
 
@@ -36,31 +41,53 @@ namespace kiko
 		if (onGround && g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE) && !g_inputSystem.GetPreviousKeyDown(SDL_SCANCODE_SPACE))
 		{
 			vec2 up = vec2{ 0, -1 };
-			//m_physicsComponent->SetVelocity(up * jump);
 			m_physicsComponent->ApplyForce(up * jump);
 		}
 
-		// Animation
-		if (onGround)
+		// Attack
+		if (g_inputSystem.GetKeyDown(SDL_SCANCODE_J) && onGround && m_spriteAnimComponent->m_sequence->name != "attack")
 		{
-			vec2 velocity = m_physicsComponent->velocity;
-			if (std::fabs(velocity.x) > 0.1f)
+			m_spriteAnimComponent->SetSequence("attack");
+			m_spriteAnimComponent->m_sequence->loop = false;
+		}
+
+		// Animation
+		if (m_spriteAnimComponent->m_sequence->name != "attack")
+		{
+			if (onGround)
 			{
-				if(dir != 0) m_spriteAnimComponent->flipH = dir < 0;
-				m_spriteAnimComponent->SetSequence("run");
+				vec2 velocity = m_physicsComponent->velocity;
+				if (std::fabs(velocity.x) > 0.1f)
+				{
+					if(dir != 0) m_spriteAnimComponent->flipH = dir < 0;
+					if(m_spriteAnimComponent->m_sequence->name != "run") m_spriteAnimComponent->SetSequence("run");
+
+				}
+				else
+				{
+					if(m_spriteAnimComponent->m_sequence->name != "idle")m_spriteAnimComponent->SetSequence("idle");
+				}
+				if (!m_spriteAnimComponent->m_sequence->loop) m_spriteAnimComponent->m_sequence->loop = true;
 			}
 			else
 			{
-				m_spriteAnimComponent->SetSequence("idle");
+				if (m_physicsComponent->velocity.y > 0)
+				{
+					m_spriteAnimComponent->SetSequence("fall");
+				}
+				else if (m_spriteAnimComponent->m_sequence->name != "jump") 
+				{
+					m_spriteAnimComponent->SetSequence("jump");
+					m_spriteAnimComponent->m_sequence->loop = false;
+				}
 			}
 		}
-		else
+		else // attacking
 		{
-			if (m_physicsComponent->velocity.y > 0)
-			{
-				m_spriteAnimComponent->SetSequence("fall");
-			}
+			if(m_spriteAnimComponent->frame == m_spriteAnimComponent->m_sequence->endFrame) m_spriteAnimComponent->SetSequence("idle");
 		}
+
+		if (transform.position.y > 900) Die();
 	}
 
 	void Player::OnCollisionEnter(Actor* other)
@@ -77,6 +104,13 @@ namespace kiko
 		{
 			groundCount--;
 		}
+	}
+
+	void Player::Die()
+	{
+		kiko::g_audioSystem.PlayOneShot("death");
+		destroyed = true;
+		dynamic_cast<PlatformGame*>(m_game)->SetState(PlatformGame::eState::PlayerDeadStart);
 	}
 
 	void Player::Read(const json_t& value)

@@ -56,6 +56,19 @@
     },
     {
       "type": "Actor",
+      "name": "Hitbox",
+      "persistent": false,
+      "prototype": true,
+      "components": [
+        {
+          "type": "Box2DCollisionComponent",
+          "restitution": 0.1,
+          "isTrigger": true
+        }
+      ]
+    },
+    {
+      "type": "Actor",
       "name": "Coin",
       "persistent": false,
       "prototype": true,

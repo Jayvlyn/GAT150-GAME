@@ -16,6 +16,8 @@
 bool PlatformGame::Init()
 {
 	// Load audio
+	kiko::g_audioSystem.AddAudio("music", "Audio/GothicGuitar.wav");
+	kiko::g_audioSystem.PlayOneShot("music", true);
 
 	// Scene
 	m_scene = std::make_unique<kiko::Scene>();
@@ -35,29 +37,40 @@ void PlatformGame::Update(float dt)
 	switch (m_state)
 	{
 	case eState::Title:
+	{
 		if (kiko::g_inputSystem.GetKeyDown(SDL_SCANCODE_SPACE)) {
 			m_scene->GetActorByName("Title")->active = false;
-			m_state = eState::StartGame;
+			SetState(eState::StartGame);
 		}
 		break;
+	}
 	case eState::StartGame:
 		m_scene->Load("Scenes/tilemap.json");
 		m_scene->Load("Scenes/Player.json");
+		m_scene->GetActorByName("Player")->m_game = this;
 		m_scene->Initialize();
-		m_state = eState::Game;
+		SetState(eState::Game);
 		break;
 	case eState::StartLevel:
 		break;
 	case eState::Game:
 		break;
 	case eState::PlayerDeadStart:
+		m_stateTimer = 3;
+		SetState(eState::PlayerDead);
 		break;
 	case eState::PlayerDead:
+		m_stateTimer -= dt;
+		if (m_stateTimer <= 0) {
+			SetState(eState::GameOver);
+		}
 		break;
 	case eState::GameOver:
-
+		m_scene->RemoveAll();
+		SetState(eState::StartGame);
 		break;
 	default:
+		SetState(eState::StartGame);
 		break;
 	}
 
@@ -71,5 +84,5 @@ void PlatformGame::Draw(kiko::Renderer& renderer)
 
 void PlatformGame::OnPlayerDead(const kiko::Event& event)
 {
-	m_state = eState::PlayerDeadStart;
+	SetState(eState::PlayerDeadStart);
 }

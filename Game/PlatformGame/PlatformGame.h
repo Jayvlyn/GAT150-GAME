@@ -29,6 +29,7 @@ public:
 	virtual void Draw(kiko::Renderer& renderer) override;
 
 	void SetState(eState state) { m_state = state; }
+
 	void OnPlayerDead(const kiko::Event& event);
 
 

@@ -3,10 +3,10 @@
 
 namespace kiko
 {
-	class Player : public Actor
+	class Enemy : public Actor
 	{
 	public:
-		CLASS_DECLARATION(Player)
+		CLASS_DECLARATION(Enemy)
 
 		bool Initialize() override;
 		void Update(float dt) override;

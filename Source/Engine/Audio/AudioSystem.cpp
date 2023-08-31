@@ -1,4 +1,7 @@
 #include "AudioSystem.h"
+#include "Core/Logger.h"
+#include <iostream>
+
 namespace kiko
 {
 	AudioSystem g_audioSystem;
@@ -28,11 +31,13 @@ namespace kiko
 			FMOD::Sound* sound = nullptr;
 			m_fmodSystem -> createSound(filename.c_str(), FMOD_DEFAULT, 0, &sound);
 			m_sounds[name] = sound;
+			
 		}
 	}
 	void AudioSystem::PlayOneShot(const std::string& name, bool loop)
 	{
 		auto iter = m_sounds.find(name);
+
 		if (iter != m_sounds.end())
 		{
 			FMOD::Sound* sound = iter->second;
