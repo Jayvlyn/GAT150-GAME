@@ -3,6 +3,7 @@
 #include "Framework/Event/EventManager.h"
 #include "Renderer/Text.h"
 #include "Core/Time.h"
+#include "Enemy.h"
 
 class PlatformGame : public kiko::Game, kiko::IEventListener
 {
@@ -31,8 +32,6 @@ public:
 	void SetState(eState state) { m_state = state; }
 
 	void OnPlayerDead(const kiko::Event& event);
-
-
 
 private:
 	eState m_state = eState::Title;

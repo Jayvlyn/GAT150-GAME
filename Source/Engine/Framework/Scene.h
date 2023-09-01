@@ -12,7 +12,7 @@ namespace kiko
 	public:
 		Scene() = default;
 
-		bool Initialize();
+		bool Initialize(bool force = true);
 		void Update(float dt);
 		void Draw(Renderer& renderer);
 

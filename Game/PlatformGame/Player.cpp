@@ -42,6 +42,7 @@ namespace kiko
 		{
 			vec2 up = vec2{ 0, -1 };
 			m_physicsComponent->ApplyForce(up * jump);
+			g_audioSystem.PlayOneShot("jump", false);
 		}
 
 		// Attack
@@ -49,6 +50,7 @@ namespace kiko
 		{
 			m_spriteAnimComponent->SetSequence("attack");
 			m_spriteAnimComponent->m_sequence->loop = false;
+			g_audioSystem.PlayOneShot("swing", false);
 		}
 
 		// Animation
@@ -95,6 +97,20 @@ namespace kiko
 		if(other->tag == "Ground")
 		{
 			groundCount++;
+		}
+
+		else if (other->tag == "Enemy" && m_spriteAnimComponent->m_sequence->name != "attack")
+		{
+			Die();
+		}
+
+		else if (other->tag == "Coin")
+		{
+			other->destroyed = true;
+			g_audioSystem.PlayOneShot("coin");
+			coinCount++;
+			auto coinText = m_scene->GetActorByName("CoinCount")->GetComponent<TextRenderComponent>();
+			if (coinText) coinText->SetText(std::to_string(coinCount));
 		}
 	}
 

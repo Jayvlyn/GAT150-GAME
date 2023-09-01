@@ -3,9 +3,13 @@
 
 namespace kiko
 {
-	bool Scene::Initialize()
+	bool Scene::Initialize(bool force)
 	{
-		for (auto& actor : m_actors) actor->Initialize();
+		for (auto& actor : m_actors) {
+
+			if(!actor->persistent || force) 
+				actor->Initialize();
+		}
 
 		return true;
 	}

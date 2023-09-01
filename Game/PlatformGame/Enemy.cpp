@@ -24,13 +24,14 @@ namespace kiko
 	{
 		Actor::Update(dt);
 
-		vec2 forward = vec2{ 1, 0 };
+		if (name == "Bat") speed = randomf(0.3, 2);
+
 		Player* player = m_scene->GetActor<Player>();
 		if (player)
 		{
 			vec2 direction = player->transform.position - transform.position;
 
-			if(Mag(m_physicsComponent->velocity) < speed)m_physicsComponent->ApplyForce(direction.Normalized() * speed);
+			m_physicsComponent->ApplyForce(direction.Normalized() * speed);
 		}
 
 		float dir = 0;
@@ -42,6 +43,11 @@ namespace kiko
 
 	void Enemy::OnCollisionEnter(Actor* other)
 	{
+		if (other->tag == "Coin")
+		{
+			other->destroyed = true;
+			g_audioSystem.PlayOneShot("coinLoss");
+		}
 	}
 
 	void Enemy::OnCollisionExit(Actor* other)
@@ -50,7 +56,7 @@ namespace kiko
 
 	void Enemy::Die()
 	{
-		kiko::g_audioSystem.PlayOneShot("death");
+		g_audioSystem.PlayOneShot("death");
 		destroyed = true;
 	}
 

@@ -5,7 +5,10 @@
       "name": "Background",
       "persistent": true,
       "transform": {
-        "position": [ 800, 450 ],
+        "position": [
+          800,
+          450
+        ],
         "scale": 5.9,
         "rotation": 0
       },
@@ -38,8 +41,8 @@
       "persistent": true,
       "transform": {
         "position": [
-          400,
-          300
+          800,
+          450
         ],
         "scale": 2,
         "rotation": 0
@@ -47,10 +50,42 @@
       "components": [
         {
           "type": "TextRenderComponent",
-          "fontName": "Fonts/Coalition_v2..ttf",
-          "fontSize": 24,
+          "fontName": "Fonts/TheCenturion2.ttf",
+          "fontSize": 70,
           "text": "Darkest Souls",
-          "color": [ 1, 0, 0, 1 ]
+          "color": [
+            1,
+            1,
+            0.9,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Actor",
+      "name": "CoinCount",
+      "persistent": true,
+      "transform": {
+        "position": [
+          700,
+          850
+        ],
+        "scale": 2,
+        "rotation": 0
+      },
+      "components": [
+        {
+          "type": "TextRenderComponent",
+          "fontName": "Fonts/TheCenturion.ttf",
+          "fontSize": 30,
+          "text": "0",
+          "color": [
+            1,
+            1,
+            0.9,
+            1
+          ]
         }
       ]
     },
@@ -70,11 +105,19 @@
     {
       "type": "Actor",
       "name": "Coin",
+      "tag": "Coin",
+      "origin": [
+        0.5,
+        1
+      ],
       "persistent": false,
       "prototype": true,
       "transform": {
-        "position": [ 0, 0 ],
-        "scale": 1,
+        "position": [
+          0,
+          0
+        ],
+        "scale": 0.5,
         "rotation": 0
       },
       "components": [
@@ -97,12 +140,16 @@
         {
           "type": "Box2DPhysicsComponent",
           "constrainAngle": true,
-          "gravityScale": 0
+          "gravityScale": 1
         },
         {
           "type": "Box2DCollisionComponent",
-          "restitution": 0.1,
-          "isTrigger": true
+          "restitution": 0.2,
+          "size": [
+            20,
+            20
+          ],
+          "isTrigger": false
         }
       ]
     }

@@ -20,6 +20,7 @@ namespace kiko
 		float speed = 0;
 		float jump = 0;
 		int groundCount = 0;
+		int coinCount = 0;
 
 		class PhysicsComponent* m_physicsComponent = nullptr;
 		class SpriteAnimRenderComponent* m_spriteAnimComponent = nullptr;

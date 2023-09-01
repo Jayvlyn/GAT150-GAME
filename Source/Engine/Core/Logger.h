@@ -51,7 +51,7 @@ namespace kiko
 
 
 	template<typename T>
-	inline Logger& Logger::operator<<(T value)
+	inline Logger& Logger::operator << (T value)
 	{
 		if(m_ostream) *m_ostream << value;
 		if (m_fstream.is_open())

@@ -15,9 +15,11 @@ namespace kiko
 			Actor* actorB = reinterpret_cast<Actor*>(fixtureB->GetUserData().pointer);
 
 			if (actorA->destroyed || actorB->destroyed) return;
-
+			if (actorA == nullptr || actorB == nullptr) return;
+			
 			actorA->OnCollisionEnter(actorB);
 			actorB->OnCollisionEnter(actorA);
+			
 		}
 	}
 
@@ -32,9 +34,11 @@ namespace kiko
 			Actor* actorB = reinterpret_cast<Actor*>(fixtureB->GetUserData().pointer);
 
 			if (actorA->destroyed || actorB->destroyed) return;
-
+			if (actorA == nullptr || actorB == nullptr) return;
+			
 			actorA->OnCollisionExit(actorB);
 			actorB->OnCollisionExit(actorA);
+			
 		}
 	}
 }

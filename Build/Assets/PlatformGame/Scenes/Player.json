@@ -4,11 +4,11 @@
       "type": "Player",
       "name": "Player",
       "tag": "Player",
-      "persistent": true,
+      "prototype": true,
       "speed": 15,
       "jump": 750,
       "transform": {
-        "position": [ 440, 300 ],
+        "position": [ 440, 500 ],
         "scale": 2,
         "rotation": 0
       },
@@ -83,7 +83,7 @@
       "type": "Enemy",
       "name": "Bat",
       "tag": "Enemy",
-      "persistent": true,
+      "prototype": true,
       "speed": 0.5,
       "jump": 750,
       "transform": {
@@ -112,24 +112,25 @@
         {
           "type": "Box2DPhysicsComponent",
           "constrainAngle": true,
-          "gravityScale": 0
+          "gravityScale": 0,
+          "damping": 0.5
         },
         {
           "type": "Box2DCollisionComponent",
           "restitution": 0,
           "friction": 0.5,
-          "size": [ 20, 40 ],
-          "isTrigger": true
+          "size": [ 20, 20 ],
+          "isTrigger": false
 
         }
       ]
     },
     {
       "type": "Enemy",
-      "name": "HellBeast",
+      "name": "Ghost",
       "tag": "Enemy",
-      "persistent": true,
-      "speed": 10,
+      "prototype": true,
+      "speed": 0.3,
       "jump": 750,
       "transform": {
         "position": [ 800, 200 ],
@@ -140,6 +141,52 @@
         {
           "type": "SpriteAnimRenderComponent",
           "origin": [ 0.5, 0.6 ],
+          "defaultSequenceName": "idle",
+          "sequences": [
+            {
+              "name": "idle",
+              "fps": 12,
+              "numColumns": 7,
+              "numRows": 1,
+              "startFrame": 1,
+              "endFrame": 7,
+              "textureName": "Textures/ghost-idle.png"
+            }
+          ],
+          "textureName": "Textures/ghost-idle.png"
+        },
+        {
+          "type": "Box2DPhysicsComponent",
+          "constrainAngle": true,
+          "gravityScale": 0,
+          "damping": 0.5
+        },
+        {
+          "type": "Box2DCollisionComponent",
+          "restitution": 0,
+          "friction": 0.5,
+          "size": [ 20, 20 ],
+          "isTrigger": true
+
+        }
+      ]
+    },
+    {
+      "type": "Enemy",
+      "name": "HellBeast",
+      "tag": "Enemy",
+      "prototype": true,
+      "speed": 5,
+      "jump": 750,
+      "transform": {
+        "position": [ 1000, 600 ],
+        "scale": 2,
+        "rotation": 0
+      },
+      "components": [
+        {
+          "type": "SpriteAnimRenderComponent",
+          "origin": [ 0.5, 0.8 ],
           "defaultSequenceName": "idle",
           "sequences": [
             {
@@ -162,8 +209,8 @@
         {
           "type": "Box2DCollisionComponent",
           "restitution": 0,
-          "friction": 0.5,
-          "size": [ 20, 40 ]
+          "friction": 0.2,
+          "size": [ 15, 30 ]
         }
       ]
     }
